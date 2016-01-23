@@ -1,0 +1,134 @@
+<template name="profile">
+
+{{#if  currentUser}}
+
+{{> navbar}}
+
+ <div class="container">
+
+	<h2>Hello {{currentUser.profile.realname}}, Let's update your profile</h2>
+    <input type="hidden" name="username" id="username" value={{currentUser.username}}>
+	<!-- Cuisine Prefernces -->
+
+	<h2>Cuisine Preferences</h2>
+
+    <div class="col-sm-12">
+	    <div class="checkbox">
+	            <label style="font-size: 1.5em">
+	                <input type="checkbox" name="cuisine" id="american"
+                    value="american" checked="{{checked}}">
+	                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+	                American
+	            </label>
+	    </div>
+
+	   <div class="checkbox">
+	            <label style="font-size: 1.5em">
+	                <input type="checkbox" name="cuisine" id="italian" 
+                            value="italian" checked="{{checked}}">
+	                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+	                Italian
+	            </label>
+	    </div>
+
+
+	   <div class="checkbox">
+	            <label style="font-size: 1.5em">
+	                <input type="checkbox" name="cuisine" id = "chinese" 
+                    value="chinese" 
+                    checked="{{checked}}">
+	                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+	                Chinese
+	            </label>
+	    </div>
+
+	    <div class="checkbox">
+	            <label style="font-size: 1.5em">
+	                <input type="checkbox" name="cuisine" id="japanese" 
+                    value="japanese" checked="{{checked}}">
+	                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+	                Japanese
+	            </label>
+	    </div>
+
+
+	    <div class="checkbox">
+	            <label style="font-size: 1.5em">
+	                <input type="checkbox" name="cuisine" id="mexican" 
+                    value="mexican" checked="{{checked}}">
+	                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+	                Mexican
+	            </label>
+	    </div>
+    </div>
+	
+	<!-- Distance Prefernces -->
+	<h2>Distance preferences</h2>	
+    <div class="col-sm-12">
+    	<div class="radio">
+            <label style="font-size: 1.5em">
+                <input type="radio" id="walk" name = "distance" value="1" checked>
+                <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                Walkable ( less than a mile )
+            </label>
+        </div>
+
+        <div class="radio">
+            <label style="font-size: 1.5em">
+                <input type="radio" id="shortDrive" name = "distance"  value="2">
+                <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                Short Drive ( Upto 5 miles )
+            </label>
+        </div>
+
+        <div class="radio">
+            <label style="font-size: 1.5em">
+                <input type="radio" id="drive" name = "distance" value="3">
+                <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                I don't mind Driving 
+            </label>
+        </div>           	
+    </div>
+
+
+ <!-- Select location -->
+ 	<h2>Location</h2>	
+    <div class="col-sm-12">
+    	<div class="radio">
+            <label style="font-size: 1.5em">
+                <input type="radio" id="msp" name="city" value="MSP" checked>
+                <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                Minneapolis
+            </label>
+        </div>
+
+        <div class="radio">
+            <label style="font-size: 1.5em">
+                <input type="radio" id="sfo" name = "city" value="SFO">
+                <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                San Francisco
+            </label>
+        </div>
+    	
+    </div>
+  
+
+
+  <!-- Save the profile -->
+
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+ 
+    	<button type="button" class="btn btn-primary btn-lg btn-block" id="profile-save">Save Profile</button>
+	</div>
+	<div class="col-md-4"></div>
+ </div>
+
+{{> footer}} 
+
+{{else}}  
+    {{> login}}
+{{/if}}
+
+
+</template>	

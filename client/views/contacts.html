@@ -1,0 +1,86 @@
+<template name="contacts ">
+    <input type="hidden" name="username" id="username" value={{currentUser.username}}>
+
+    <div class="form-group">
+      
+
+        <div class="input-group col-md-12 col-lg-12 col-xs-12">
+              <input type="text" id="contactname" class="form-control">
+              <span class="input-group-btn">
+                <button class="btn btn-primary" id="addcontact" type="button">+</button>
+              </span>
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+      <div class="radio">
+            <label style="font-size: 1.5em">
+                <input type="radio" id="myfriend" name = "category" value="1" checked>
+                <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                Friend
+            </label>
+        </div>
+
+        <div class="radio">
+            <label style="font-size: 1.5em">
+                <input type="radio" id="myfamily" name = "category"  value="2">
+                <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                Family
+            </label>
+        </div>
+
+        <div class="radio">
+            <label style="font-size: 1.5em">
+                <input type="radio" id="mycoworker" name = "category" value="3">
+                <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                Co Worker 
+            </label>
+        </div>            
+    </div>
+
+
+    <div class="container-fluid col-md-4">
+
+
+    	<ul class="list-group ">
+    	 <a href = "#" class = "list-group-item active">
+      			<h4 class = "list-group-item-heading">
+         Friends
+     	 </h4></a>
+  			{{#each friends}}
+   			 <li class="list-group-item">
+              <a href="">{{contactname}}</a>
+         </li>
+  			{{/each}}
+        </ul>
+    </div>
+
+    <div class="container-fluid col-md-4">
+      <ul class="list-group ">
+       <a href = "#" class = "list-group-item active">
+            <h4 class = "list-group-item-heading">
+         Family
+       </h4></a>
+        {{#each family}}
+         <li class="list-group-item">
+              <a href="">{{contactname}}</a>
+         </li>
+        {{/each}}
+        </ul>
+    </div>
+
+    <div class="container-fluid col-md-4">
+      <ul class="list-group ">
+       <a href = "#" class = "list-group-item active">
+            <h4 class = "list-group-item-heading">
+         Co-Workers
+       </h4></a>
+        {{#each coworkers}}
+         <li class="list-group-item">
+              <a href="">{{contactname}}</a>
+         </li>
+        {{/each}}
+        </ul>
+    </div>
+	
+</template>

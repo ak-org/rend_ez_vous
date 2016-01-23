@@ -1,0 +1,34 @@
+<template name="landing">
+{{> navbar}}
+{{#if  currentUser}}
+
+<div class="container">
+    <h2>Hello {{currentUser.profile.realname}}</h2>
+    <div class="row-fluid">
+      
+      <div class="col-sm-4">
+ 			<ul class="list-group">    	
+		 		<li class="list-group-item"><span class="badge">2</span><a href="/upcoming"> <h4 class = "list-group-item-heading">Upcoming Events</h4></a></li>	
+		  		<li class="list-group-item"><a href="/myevent">Organize Events </a></li>
+		   		<li class="list-group-item"><span class="badge">2</span><a href="/recvd">Invites  Received</a></li>
+		   		<li class="list-group-item"><span class="badge">4</span><a href="/sent">Invites  Sent </a></li>
+		    	<li class="list-group-item"><span class="badge">11</span><a href="/messages">Messages </a></li>
+		    	<li class="list-group-item" id="user-profile"><a href="/profile">Profile</a></li>
+          <li class="list-group-item" id="user-contacts"><a href="/contacts">Contacts</a></li>
+		    </ul>
+      </div>
+      <div class="col-sm-8">
+           
+          {{>yield}}          
+
+      </div>
+     </div>
+ </div> 
+ 
+{{else}}  
+    {{> login}}
+{{/if}}
+
+{{> footer}}
+</template>	
+   

@@ -1,0 +1,29 @@
+<template name="recvd">
+    <div class="container-fluid">
+    	<ul class="list-group">
+    	 <a href = "#" class = "list-group-item active">
+      			<h4 class = "list-group-item-heading">
+         Incoming Invites
+     	 </h4></a>
+  			{{#each invites}}
+   			
+   			 
+             <li class="list-group-item">
+             <h4><a href="">{{title}}              
+             </a></h4>
+            
+             		<button type="button" class="btn btn-success btn-lg invite-choices-accept"> Accept
+             		</button>
+    
+             	 
+             		 <button type="button" class="btn btn-danger btn-lg invite-choices-decline"> Decline 
+             		  </button>
+
+             </li>
+
+   			
+  			{{/each}}
+        </ul>
+    </div>
+	
+</template>

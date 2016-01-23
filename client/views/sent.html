@@ -1,0 +1,19 @@
+<template name="sent">
+<div class="container-fluid">
+    	<ul class="list-group">
+    	 <a href = "#" class = "list-group-item active">
+      			<h4 class = "list-group-item-heading">
+         Awaiting Responses
+     	 </h4></a>
+  			{{#each pending}}
+   			 <li class="list-group-item">
+   			      <a href="">{{title}}</a>
+   			      <h5>Yes : {{yes}}</h5>
+   			      <h5>No : {{no}}</h5> 
+   			      <h5>No Response : {{undecided}}</h5>
+   			 </li>
+  			{{/each}}
+        </ul>
+    </div>
+	
+</template>

@@ -1,0 +1,15 @@
+<template name="upcoming">
+    <div class="container-fluid">
+    	<ul class="list-group">
+    	 <a href = "#" class = "list-group-item active">
+      			<h4 class = "list-group-item-heading">
+         Upcoming Events
+     	 </h4></a>
+  			{{#each invites}}
+   			 <li class="list-group-item"><a href="">{{title}}</a></li>
+  			{{/each}}
+        </ul>
+    </div>
+	
+	
+</template>

@@ -1,0 +1,143 @@
+<template name="myevent">
+
+
+     <div class="container-fluid">
+
+		<div class="list-group">
+  			<a href="#" class="list-group-item active">New Event</a>
+
+		</div>
+	<form action="">
+		<div class="form-group">
+            
+                <input type="text" class="form-control" id="eventName" placeholder="Name this Event such as Lunch with...">
+
+        </div>
+
+        <div class="form-group">
+            <div class="container row">
+				<div class="dropdown col-md-1 text-left">
+				<span class="label label-primary">Date</span>
+				</div>
+                 <div class="dropdown col-md-1">
+					<select id="month-select">
+					    <option disabled="disabled" selected="selected">Month</option> 
+					    {{#each months}}
+					        <option value="{{this}}">{{this}}</option>
+					    {{/each}}
+					</select>
+				</div>
+
+                 <div class="dropdown col-md-1">
+					<select id="day-select">
+					    <option disabled="disabled" selected="selected">Day</option> 
+					    {{#each days}}
+					        <option value="{{this}}">{{this}}</option>
+					    {{/each}}
+					</select>
+				</div>
+
+
+                 <div class="dropdown col-md-1">
+					<select id="day-select">
+					    <option disabled="disabled" selected="selected">Year</option> 
+					    {{#each years}}
+					        <option value="{{this}}">{{this}}</option>
+					    {{/each}}
+					</select>
+				</div>
+
+
+ 				<div class="dropdown col-md-1 text-right">
+ 				<span class="label label-primary">Time</span>
+ 				</div>
+                 <div class="dropdown col-md-1">
+					<select id="hour-select">
+					    <option disabled="disabled" selected="selected">HH</option> 
+					    {{#each hours}}
+					        <option value="{{this}}">{{this}}</option>
+					    {{/each}}
+					</select>
+				</div>
+
+
+                 <div class="dropdown col-md-1">
+					<select id="min-select">
+					    <option disabled="disabled" selected="selected">MM</option> 
+					    {{#each minutes}}
+					        <option value="{{this}}">{{this}}</option>
+					    {{/each}}
+					</select>
+				</div>				
+
+                 <div class="dropdown col-md-1">
+					<select id="ampm-select">
+					    <option disabled="disabled" selected="selected">AM/PM</option> 
+					    {{#each ampm}}
+					        <option value="{{this}}">{{this}}</option>
+					    {{/each}}
+					</select>
+				</div>
+
+        	</div>
+        </div>
+
+        <div class="form-group">
+            
+			<div class="input-group">
+			        <input type="text" id="friendname" class="form-control">
+			        <span class="input-group-btn">
+			          <button class="btn btn-primary" id="addfriend" type="button">Add Friend</button>
+			        </span>
+     		</div>
+
+        </div>
+
+        <div class="">
+
+     		{{#each friendlist}}
+    			<p>
+				    <ul class="list-group">
+				    	 <li class="list-group-item">
+				    	 
+				    	    <span class="badge">
+				    	    	<i class="fa fa-close fa-2x"></i>
+
+				    	    </span>
+				    	
+				      		<h3 class = "list-group-item-heading">{{name}}
+				     		 </h3>
+				         </li>
+				    </ul>  
+    			</p>
+  			{{/each}}
+    	</div>
+
+
+
+
+
+		<div class="form-group">
+				<div class="row">
+					<div class="col-md-4 col-md-offset-4 col-xs-4 col-xs-offset-4 ">
+					  <div class="btn-group">
+						
+						<button type="submit" name="event-next" id="event-next" class="btn btn-large btn-primary" value="">
+							Review Restaurants
+						<span class="fa fa-arrow-right icon-large"></span>
+						</button>
+						
+					  </div>	
+					</div>
+				</div>
+		</div>
+
+		
+
+	</form>
+
+</div>
+
+</template>
+
+

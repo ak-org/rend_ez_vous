@@ -70,6 +70,12 @@ Router.route('myevent', function() {
 
 });
 
+Router.route('schedule', function() {
+     this.render('schedule');
+     this.layout('landing');
+
+});
+
 Router.route('contacts', function() {
      this.render('contacts');
      this.layout('landing');

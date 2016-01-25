@@ -21,3 +21,4 @@ iron:router
 fortawesome:fontawesome
 accounts-base
 accounts-password
+http

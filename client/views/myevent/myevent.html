@@ -1,10 +1,11 @@
 <template name="myevent">
 
+	<input type="hidden" name="username" id="username" value={{currentUser.username}}>
 
      <div class="container-fluid">
 
 		<div class="list-group">
-  			<a href="#" class="list-group-item active">New Event</a>
+  			<a href="#" class="list-group-item active">Create an Event</a>
 
 		</div>
 	<form action="">
@@ -16,9 +17,7 @@
 
         <div class="form-group">
             <div class="container row">
-				<div class="dropdown col-md-1 text-left">
-				<span class="label label-primary">Date</span>
-				</div>
+
                  <div class="dropdown col-md-1">
 					<select id="month-select">
 					    <option disabled="disabled" selected="selected">Month</option> 
@@ -39,7 +38,7 @@
 
 
                  <div class="dropdown col-md-1">
-					<select id="day-select">
+					<select id="year-select">
 					    <option disabled="disabled" selected="selected">Year</option> 
 					    {{#each years}}
 					        <option value="{{this}}">{{this}}</option>
@@ -85,7 +84,7 @@
         <div class="form-group">
             
 			<div class="input-group">
-			        <input type="text" id="friendname" class="form-control">
+			        <input type="text" id="friendname" placeholder="enter userid of your contact" class="form-control">
 			        <span class="input-group-btn">
 			          <button class="btn btn-primary" id="addfriend" type="button">Add Friend</button>
 			        </span>
@@ -105,8 +104,8 @@
 
 				    	    </span>
 				    	
-				      		<h3 class = "list-group-item-heading">{{name}}
-				     		 </h3>
+				      		<h4 class = "list-group-item-heading">{{realname}}
+				     		 </h4>
 				         </li>
 				    </ul>  
     			</p>
@@ -122,8 +121,8 @@
 					<div class="col-md-4 col-md-offset-4 col-xs-4 col-xs-offset-4 ">
 					  <div class="btn-group">
 						
-						<button type="submit" name="event-next" id="event-next" class="btn btn-large btn-primary" value="">
-							Review Restaurants
+						<button type="button" name="event-next" id="event-next" class="btn btn-large btn-primary" value="">
+							Preview Restaurants
 						<span class="fa fa-arrow-right icon-large"></span>
 						</button>
 						

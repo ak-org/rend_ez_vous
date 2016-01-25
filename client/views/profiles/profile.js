@@ -10,7 +10,10 @@ Meteor.subscribe('profiles');
 
     Template.profile.events({
 
+
+
         'click #profile-save' : function(e, data) {
+
             e.preventDefault();
             var city ;
             var distance; 
@@ -25,8 +28,8 @@ Meteor.subscribe('profiles');
             var shortDriveSelected = data.find('#shortDrive').checked;
             var sfoSelected = data.find('#sfo').checked;
             var mspSelected = data.find('#msp').checked;
-
-
+            var realname = Meteor.users.find({username: username}).fetch();
+            console.log("Real name = " , realname[0].profile.realname);
             
             if (sfoSelected) { city = "sfo"; }
             if (mspSelected) { city = "msp"; }
@@ -61,15 +64,16 @@ Meteor.subscribe('profiles');
                                 ],
                                 city : city,
                                 distance : distance,
-
+                                realname : realname[0].profile.realname,
                                 updatedAt: new Date() 
                             }
                         });
                 }
                 else {
-                    console.log("New User, new emtry!");
+                    console.log("New User, new entry!");
                     Profiles.insert({
                       username: username,
+                      realname : realname[0].profile.realname,
                       cuisine : [
                        { mexican : mexicanSelected } ,
                         { american : americanSelected } ,
@@ -81,20 +85,13 @@ Meteor.subscribe('profiles');
                      distance : distance,
 
                      createdAt: new Date() 
-                     });
-
-
-                
+                     });             
 
                 
                 }
                 // Saved the profile data in the backend
                 Router.go('landing');
             }
-
-            
-
-            
 
             
          }

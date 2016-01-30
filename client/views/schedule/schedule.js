@@ -1,6 +1,6 @@
 var eventDetails ;
 
-
+Meteor.subscribe('events');
 
 
 Template.schedule.rendered = function() {
@@ -13,7 +13,7 @@ Template.schedule.rendered = function() {
 
 		for (i = 0; i < 20; i++) 
 			eventDetails.restaurantSelected[i] = false;
-		
+
 
 		for (var item=0; item < eventDetails.inviteeCount; item++ ) {
 			pref = eventDetails.invitees[item].cuisine;
@@ -72,7 +72,7 @@ Template.schedule.rendered = function() {
     	Meteor.call('getRestaurantList', loc, cuisine, 500, function(err, results) {
     		console.log("Server responded with ", results);
     		returnedResults = JSON.parse(results.content);
-    		console.log(returnedResults.results);
+    		//console.log(returnedResults.results);
     		Session.set('returnedResults', returnedResults.results);
     	});
     			
@@ -264,8 +264,26 @@ Template.schedule.events({
     },
 
     'click #create-event' : function (e, data) {
+    	var selectorIndex = 0;
     	console.log("Create event button was clicked");
+    	eventDetails.pickedRestaurants = [];
+    	eventDetails.pickedRestaurantsVote = [];
+    	for (var i = 0; i < 20; i++) {
+    		if (eventDetails.restaurantSelected[i] == true) {
+    			eventDetails.pickedRestaurants[selectorIndex] = eventDetails.returnedResults[i];
+    			eventDetails.pickedRestaurantsVote[selectorIndex] = 1;
+    			selectorIndex++;
+    		}
+    		 
+     	}
     	console.log("Final details ", eventDetails);
+
+    	Events.insert({
+    			eventDetails : eventDetails,
+    			createdAt : new Date() 
+    	});
+    	alert("Event " + eventDetails.eventname + "created Successfully!");
+    	Router.go('sent');
     }
 
 

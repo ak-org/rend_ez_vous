@@ -3,14 +3,14 @@
     	<ul class="list-group">
     	 <a href = "#" class = "list-group-item active">
       			<h4 class = "list-group-item-heading">
-         Awaiting Responses
+         Invites Sent 
      	 </h4></a>
-  			{{#each pending}}
+  			{{#each eventList}}
    			 <li class="list-group-item">
-   			      <a href="">{{title}}</a>
-   			      <h5>Yes : {{yes}}</h5>
-   			      <h5>No : {{no}}</h5> 
-   			      <h5>No Response : {{undecided}}</h5>
+   			      <h4><a href="">{{eventDetails.eventname}} on 
+                  {{eventDetails.date}}</a></h4>
+   			      
+
    			 </li>
   			{{/each}}
         </ul>

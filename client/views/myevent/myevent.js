@@ -132,7 +132,7 @@ Template.myevent.events({
             else {
                 realname = Profiles.find({username: contactname}).fetch();
                 console.log(realname[0].realname);
-                invitees.insert({name : contactname, realname : realname[0].realname, loc : realname[0].city, cuisine: realname[0].cuisine});
+                invitees.insert({name : contactname, realname : realname[0].realname, loc : realname[0].city, cuisine: realname[0].cuisine, response : 'NoResponse'});
                 console.log("Added " + contactname + " to the invitee list!");
                 console.log("Invitees for  your event " , invitees.find().count());
             }

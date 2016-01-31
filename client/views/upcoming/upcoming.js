@@ -15,7 +15,8 @@ Template.upcoming.onRendered(function() {
 Template.upcoming.helpers({
     eventList : function() {
         
-        userEvents = Events.find({});
+        userEvents = Events.find({ $or : [{"eventDetails.organizer" : Meteor.user().username}, 
+                                     {"eventDetails.invitees.name" : Meteor.user().username}]});
             console.log(userEvents.collection);
             return  userEvents;
         },

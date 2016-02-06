@@ -3,6 +3,7 @@
 {{#if  currentUser}}
 
 {{> navbar}}
+{{currentProfile}}
 
  <div class="container">
 
@@ -16,7 +17,7 @@
 	    <div class="checkbox">
 	            <label style="font-size: 1.5em">
 	                <input type="checkbox" name="cuisine" id="american"
-                    value="american" checked="{{checked}}">
+                    value="american" checked="{{isAmericanChecked}}">
 	                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
 	                American
 	            </label>
@@ -25,7 +26,7 @@
 	   <div class="checkbox">
 	            <label style="font-size: 1.5em">
 	                <input type="checkbox" name="cuisine" id="italian" 
-                            value="italian" checked="{{checked}}">
+                            value="italian" checked="{{isItalianChecked}}">
 	                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
 	                Italian
 	            </label>
@@ -36,7 +37,7 @@
 	            <label style="font-size: 1.5em">
 	                <input type="checkbox" name="cuisine" id = "chinese" 
                     value="chinese" 
-                    checked="{{checked}}">
+                    checked="{{isChineseChecked}}">
 	                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
 	                Chinese
 	            </label>
@@ -45,7 +46,7 @@
 	    <div class="checkbox">
 	            <label style="font-size: 1.5em">
 	                <input type="checkbox" name="cuisine" id="japanese" 
-                    value="japanese" checked="{{checked}}">
+                    value="japanese" checked="{{isJapaneseChecked}}">
 	                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
 	                Japanese
 	            </label>
@@ -55,7 +56,7 @@
 	    <div class="checkbox">
 	            <label style="font-size: 1.5em">
 	                <input type="checkbox" name="cuisine" id="mexican" 
-                    value="mexican" checked="{{checked}}">
+                    value="mexican" checked="{{isMexicanChecked}}">
 	                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
 	                Mexican
 	            </label>
@@ -67,7 +68,7 @@
     <div class="col-sm-12">
     	<div class="radio">
             <label style="font-size: 1.5em">
-                <input type="radio" id="walk" name = "distance" value="1" checked>
+                <input type="radio" id="walk" name = "distance" value="1" checked="{{walkOption}}">
                 <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
                 Walkable ( less than a mile )
             </label>
@@ -75,7 +76,7 @@
 
         <div class="radio">
             <label style="font-size: 1.5em">
-                <input type="radio" id="shortDrive" name = "distance"  value="2">
+                <input type="radio" id="shortDrive" name = "distance"  value="2" checked="{{shortDriveOption}}">
                 <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
                 Short Drive ( Upto 5 miles )
             </label>
@@ -83,7 +84,7 @@
 
         <div class="radio">
             <label style="font-size: 1.5em">
-                <input type="radio" id="drive" name = "distance" value="3">
+                <input type="radio" id="drive" name = "distance" value="3" checked="{{justDriveOption}}">
                 <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
                 I don't mind Driving 
             </label>
@@ -93,22 +94,73 @@
 
  <!-- Select location -->
  	<h2>Location</h2>	
+    <h4>Pick the closest city, if your city is not listed below.</h4>    
     <div class="col-sm-12">
-    	<div class="radio">
+    <div class = "col-sm-6">
+        <div class="radio">
             <label style="font-size: 1.5em">
-                <input type="radio" id="msp" name="city" value="MSP" checked>
+                <input type="radio" id="Minneapolis" name="city" value="Minneapolis" checked="{{isMinneapolisChecked}}" >
                 <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
                 Minneapolis
             </label>
         </div>
-
         <div class="radio">
             <label style="font-size: 1.5em">
-                <input type="radio" id="sfo" name = "city" value="SFO">
+                <input type="radio" id="StPaul" name="city" value="StPaul" checked="{{isStPaulChecked}}">
                 <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
-                San Francisco
+                St Paul
             </label>
         </div>
+        <div class="radio">
+            <label style="font-size: 1.5em">
+                <input type="radio" id="MapleGrove" name="city" value="MapleGrove" checked="{{isMapleGroveChecked}}">
+                <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                Maple Grove
+            </label>
+        </div>
+        <div class="radio">
+            <label style="font-size: 1.5em">
+                <input type="radio" id="Plymouth" name="city" value="Plymouth" checked="{{isPlymouthChecked}}">
+                <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                Plymouth
+            </label>
+        </div>
+    </div>
+
+    <div class = "col-sm-6">
+        <div class="radio">
+            <label style="font-size: 1.5em">
+                <input type="radio" id="EdenPrarie" name="city" value="EdenPrarie" checked="{{isEdenPrarieChecked}}">
+                <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                Eden Prarie
+            </label>
+        </div>
+        <div class="radio">
+            <label style="font-size: 1.5em">
+                <input type="radio" id="Bloomington" name="city" value="Bloomington" checked="{{isBloomingtonChecked}}">
+                <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                Bloomington
+            </label>
+        </div>
+        <div class="radio">
+            <label style="font-size: 1.5em">
+                <input type="radio" id="WhiteBearLake" name="city" value="WhiteBearLake" checked="{{isWhiteBearLakeChecked}}">
+                <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                White Bear Lake 
+            </label>
+        </div>
+        <div class="radio">
+            <label style="font-size: 1.5em">
+                <input type="radio" id="Woodbury" name="city" value="Woodbury" checked="{{isWoodburyChecked}}">
+                <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                Woodbury
+            </label>
+        </div>
+    </div>
+
+    	
+        
+
     	
     </div>
   

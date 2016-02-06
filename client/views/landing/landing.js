@@ -34,7 +34,8 @@ Template.landing.events({
 
 		'click #user-profile' : function(e, data) {
             e.preventDefault();
-            console.log("You clicked profile");
+            Session.set('loggedinusername' , Meteor.user().username);
+            console.log("You clicked profile " + " for " + Session.get('loggedinusername'));
             Router.go('profile')
         }
 });

@@ -194,38 +194,44 @@ var determineMeetingLocation = function(eventDetails) {
         if (flag1 == false ) {
             if ((locMatrix[0][0] + locMatrix[0][1] + locMatrix[0][2]) == eventDetails.inviteeCount + 1 ) {
             returnLoc = "Minneapolis";
+            flag2 = true;
             }
 
             // All participants are in the east, center or west metro areas 
      
             if ((locMatrix[1][0] + locMatrix[1][1] + locMatrix[1][2]) == eventDetails.inviteeCount + 1 ) {
                 returnLoc = "Minneapolis";
+                flag2 = true;
             }
 
             // All participants are in the south/east, south or south west metro areas 
 
             if ((locMatrix[2][0] + locMatrix[2][1] + locMatrix[2][2]) == eventDetails.inviteeCount + 1 ) {
                 returnLoc = "Bloomington";
+                flag2 = true;
             }
         
             // All participants are in the north west or west or south west areas
 
             if ((locMatrix[0][0] + locMatrix[1][0] + locMatrix[2][0]) == eventDetails.inviteeCount + 1 ) {
                 returnLoc = "Plymouth";
+                flag2 = true;
             }
 
             // All participants are in the north  or center or southern areas
 
             if ((locMatrix[0][1] + locMatrix[1][1] + locMatrix[2][1]) == eventDetails.inviteeCount + 1 ) {
                 returnLoc= "Minneapolis";
+                flag2 = true;
             }
 
             // All participants are in the south east, east or south west areas
 
             if ((locMatrix[0][2] + locMatrix[1][2] + locMatrix[2][2]) == eventDetails.inviteeCount + 1 ) {
                 returnLoc = "St. Paul";
+                flag2 = true;
             }
-            flag2 = true;
+            
         }
         // All participants are in the north/east, north or north west metro areas 
 

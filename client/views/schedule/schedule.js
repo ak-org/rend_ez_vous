@@ -2,7 +2,6 @@ var eventDetails ;
 
 Meteor.subscribe('events');
 
-
 var determineCuisine = function (eventDetails) {
         
         var cuisineChoice = "";
@@ -241,7 +240,6 @@ var determineMeetingLocation = function(eventDetails) {
 
 
 }  // end of determineMeetingLocation 
-
 
 
 Template.schedule.rendered = function() {

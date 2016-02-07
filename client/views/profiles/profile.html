@@ -3,8 +3,9 @@
 {{#if  currentUser}}
 
 {{> navbar}}
-{{currentProfile}}
+{{#if currentProfile}}
 
+{{/if}}
  <div class="container">
 
 	<h2>Hello {{currentUser.profile.realname}}, Let's update your profile</h2>
@@ -130,9 +131,9 @@
     <div class = "col-sm-6">
         <div class="radio">
             <label style="font-size: 1.5em">
-                <input type="radio" id="EdenPrarie" name="city" value="EdenPrarie" checked="{{isEdenPrarieChecked}}">
+                <input type="radio" id="EdenPrairie" name="city" value="EdenPrarie" checked="{{isEdenPrairieChecked}}">
                 <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
-                Eden Prarie
+                Eden Prairie
             </label>
         </div>
         <div class="radio">

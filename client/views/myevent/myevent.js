@@ -131,6 +131,9 @@ Template.myevent.events({
             }
             else {
                 realname = Profiles.find({username: contactname}).fetch();
+                var orgLoc = Profiles.find({username: username}).fetch();
+                Session.set('organizerLoc', orgLoc[0].city);
+                Session.set('organizerCuisinePref', orgLoc[0].cuisine);
                 console.log(realname[0].realname);
                 invitees.insert({name : contactname, realname : realname[0].realname, loc : realname[0].city, cuisine: realname[0].cuisine, response : 'NoResponse'});
                 console.log("Added " + contactname + " to the invitee list!");
@@ -178,10 +181,14 @@ Template.myevent.events({
         /* Data collection is complete at the moment */
         if ( (eventFlag) && (dateFlag) && (inviteeFlag) ) {
 
+      
+
 
             eventDetails.eventname = eventname;
             eventDetails.date = date;
             eventDetails.organizer = username;
+            eventDetails.organizerLoc = Session.get('organizerLoc');
+            eventDetails.organizerCuisinePef = Session.get('organizerCuisinePref');
             eventDetails.inviteeCount = invitees.find().count();
             eventDetails.invitees = invitees.find().fetch();
 

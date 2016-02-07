@@ -3,73 +3,271 @@ var eventDetails ;
 Meteor.subscribe('events');
 
 
+var determineCuisine = function (eventDetails) {
+        
+        var cuisineChoice = "";
+        var prefCuisineCount = [0 ,0 ,0, 0, 0];
+        var foundMatchForAll = false;
+        var pref;
+        
+
+        for (var item=0; item < eventDetails.inviteeCount; item++ ) {
+            pref = eventDetails.invitees[item].cuisine;
+            console.log(pref);      
+            if (pref[0].mexican) { 
+                prefCuisineCount[0]++;
+            }
+
+            if (pref[1].american) { 
+                prefCuisineCount[1]++;
+            }
+
+            if (pref[2].italian) { 
+                prefCuisineCount[2]++;
+            }
+
+            if (pref[3].chinese) { 
+                prefCuisineCount[3]++;
+            }
+
+            if (pref[4].japanese) { 
+                prefCuisineCount[4]++;
+            }
+
+        }
+        
+        // account for organizer preferences as well
+
+        if (eventDetails.organizerCuisinePef[0].mexican) { 
+            prefCuisineCount[0]++;
+        }
+        if (eventDetails.organizerCuisinePef[1].american) { 
+            prefCuisineCount[1]++;
+        }
+        if (eventDetails.organizerCuisinePef[2].italian) { 
+            prefCuisineCount[2]++;
+        }
+        if (eventDetails.organizerCuisinePef[3].chinese) { 
+            prefCuisineCount[3]++;
+        }
+        if (eventDetails.organizerCuisinePef[4].japanese) { 
+            prefCuisineCount[4]++;
+        }
+
+        
+        // if count is same as invitees + organizer, we have a good match
+
+        if (prefCuisineCount[0] > eventDetails.inviteeCount) { foundMatchForAll = true; cuisineChoice += "Mexican|"; }
+        if (prefCuisineCount[1] > eventDetails.inviteeCount) { foundMatchForAll = true; cuisineChoice += "American|"; }
+        if (prefCuisineCount[2] > eventDetails.inviteeCount) { foundMatchForAll = true; cuisineChoice += "Italian|"; }
+        if (prefCuisineCount[3] > eventDetails.inviteeCount) { foundMatchForAll = true; cuisineChoice += "Chinese|"; }
+        if (prefCuisineCount[4] > eventDetails.inviteeCount) { foundMatchForAll = true; cuisineChoice += "Japanese"; }
+
+        if (foundMatchForAll == false) {
+
+            // No hit was 1005, make it superset of everyone's preference
+
+            if (prefCuisineCount[0] > 0) { cuisineChoice += "Mexican|"; }
+            if (prefCuisineCount[1] > 0) { cuisineChoice += "American|"; }
+            if (prefCuisineCount[2] > 0) { cuisineChoice += "Italian|"; }
+            if (prefCuisineCount[3] > 0) { cuisineChoice += "Chinese|"; }
+            if (prefCuisineCount[4] > 0) { cuisineChoice += "Japanese"; }
+
+        }
+
+        return cuisineChoice;
+
+}
+
+
+var determineMeetingLocation = function(eventDetails) {
+        
+        var returnLoc;
+        var locMatrix = [
+                            [ 0, 0, 0],
+                            [ 0, 0, 0],
+                            [ 0, 0, 0]
+        ];
+        var flag1 = false;
+        var flag2 = false;
+
+       for (var item=0; item < eventDetails.inviteeCount; item++ ) {
+                if (eventDetails.invitees[item].loc === "White Bear Lake") {
+                    locMatrix[0][2]++;
+                }
+                if (eventDetails.invitees[item].loc === "Maple Grove") {
+                    locMatrix[0][0]++;
+                }
+
+
+                if (eventDetails.invitees[item].loc === "Plymouth") {
+                    locMatrix[1][0]++;
+                }
+                if (eventDetails.invitees[item].loc === "Minneapolis") {
+                    locMatrix[1][1]++;
+                }
+                if (eventDetails.invitees[item].loc === "St. Paul") {
+                    locMatrix[1][2]++;
+                }
+
+                if (eventDetails.invitees[item].loc === "Eden Prairie") {
+                    locMatrix[2][0]++;
+                }
+                if (eventDetails.invitees[item].loc === "Bloomington") {
+                    locMatrix[2][1]++;
+                }
+                if (eventDetails.invitees[item].loc === "Woodbury") {
+                    locMatrix[2][2]++;
+                }
+
+        }
+
+        if (eventDetails.organizerLoc === "White Bear Lake") {
+            locMatrix[0][2]++;
+        }
+        if (eventDetails.organizerLoc === "Maple Grove") {
+            locMatrix[0][0]++;
+        }
+
+
+        if (eventDetails.organizerLoc === "Plymouth") {
+            locMatrix[1][0]++;
+        }
+        if (eventDetails.organizerLoc === "Minneapolis") {
+            locMatrix[1][1]++;
+        }
+        if (eventDetails.organizerLoc === "St. Paul") {
+            locMatrix[1][2]++;
+        }
+
+        if (eventDetails.organizerLoc === "Eden Prairie") {
+            locMatrix[2][0]++;
+        }
+        if (eventDetails.organizerLoc === "Bloomington") {
+            locMatrix[2][1]++;
+        }
+        if (eventDetails.organizerLoc === "Woodbury") {
+            locMatrix[2][2]++;
+        }
+
+        console.log("Location Matrix ", locMatrix, "count = " + eventDetails.inviteeCount);
+
+        // case #1 all participants are in the same location return that location
+
+
+        if ( locMatrix[0][0] == ( eventDetails.inviteeCount + 1 ) ) {
+            returnLoc = "Maple Grove";
+            flag1 = true;
+        }
+        if ( locMatrix[0][2] == ( eventDetails.inviteeCount + 1 ) ) {
+            returnLoc = "White Bear Lake";
+            flag1 = true;
+        }
+
+        if ( locMatrix[1][0] == ( eventDetails.inviteeCount + 1 ) ) {
+            returnLoc= "Plymouth";
+            flag1 = true;            
+        }
+        if ( locMatrix[1][1] == ( eventDetails.inviteeCount + 1 ) ) {
+            returnLoc = "Minneapolis";
+            flag1 = true;        
+        }
+        if ( locMatrix[1][2] == ( eventDetails.inviteeCount + 1 ) ) {
+            returnLoc = "St. Paul";
+            flag1 = true;        
+        }
+     
+
+        if ( locMatrix[2][0] == eventDetails.inviteeCount + 1 ) {
+            returnLoc = "Eden Prairie";
+            flag1 = true;            
+        }
+        if ( locMatrix[2][1] == eventDetails.inviteeCount + 1 ) {
+            returnLoc = "Bloomington";
+            flag1 = true;            
+        }
+        if ( locMatrix[2][2] == eventDetails.inviteeCount + 1 ) {
+            returnLoc = "Woodbury";
+            flag1 = true;
+        }
+
+        
+        if (flag1 == false ) {
+            if ((locMatrix[0][0] + locMatrix[0][1] + locMatrix[0][2]) == eventDetails.inviteeCount + 1 ) {
+            returnLoc = "Minneapolis";
+            }
+
+            // All participants are in the east, center or west metro areas 
+     
+            if ((locMatrix[1][0] + locMatrix[1][1] + locMatrix[1][2]) == eventDetails.inviteeCount + 1 ) {
+                returnLoc = "Minneapolis";
+            }
+
+            // All participants are in the south/east, south or south west metro areas 
+
+            if ((locMatrix[2][0] + locMatrix[2][1] + locMatrix[2][2]) == eventDetails.inviteeCount + 1 ) {
+                returnLoc = "Bloomington";
+            }
+        
+            // All participants are in the north west or west or south west areas
+
+            if ((locMatrix[0][0] + locMatrix[1][0] + locMatrix[2][0]) == eventDetails.inviteeCount + 1 ) {
+                returnLoc = "Plymouth";
+            }
+
+            // All participants are in the north  or center or southern areas
+
+            if ((locMatrix[0][1] + locMatrix[1][1] + locMatrix[2][1]) == eventDetails.inviteeCount + 1 ) {
+                returnLoc= "Minneapolis";
+            }
+
+            // All participants are in the south east, east or south west areas
+
+            if ((locMatrix[0][2] + locMatrix[1][2] + locMatrix[2][2]) == eventDetails.inviteeCount + 1 ) {
+                returnLoc = "St. Paul";
+            }
+            flag2 = true;
+        }
+        // All participants are in the north/east, north or north west metro areas 
+
+        
+
+        // For all other cases, we will leave it to minneapolis
+        if ( (flag1 == false) && (flag2 == false) ) {
+            returnLoc = "Minneapolis";            
+        }
+
+        return returnLoc;
+
+
+}  // end of determineMeetingLocation 
+
+
+
 Template.schedule.rendered = function() {
 		eventDetails = Session.get("eventDetails");
     	console.log(eventDetails);
 		var loc = eventDetails.invitees[0].loc;
-		var pref;
+		
 		var cuisine = "";
+
 		eventDetails.restaurantSelected = [];
 
 		for (i = 0; i < 20; i++) 
 			eventDetails.restaurantSelected[i] = false;
 
-
-		for (var item=0; item < eventDetails.inviteeCount; item++ ) {
-			pref = eventDetails.invitees[item].cuisine;
-			console.log(pref);		
-			if (pref[0].mexican) { 
-				cuisine += "Mexican|"; 
-				/*
-				if (cuisine.search("Mexican") == 0) {
-					cuisine += "Mexican|"; 
-				}
-				*/	
-			}
-
-			if (pref[1].american) { 
-				cuisine += "American|"; 	
-				/*
-				if (cuisine.search("American") == 0) {
-					cuisine += "American|"; 
-				}
-				*/
-			}
-
-			if (pref[2].italian) { 
-				cuisine += "Italian|"; 
-				/*
-				if (cuisine.search("Italian") == 0) {
-					cuisine += "Italian|"; 
-				}
-				*/	
-			}
-
-			if (pref[3].chinese) { 
-				cuisine += "Chinese|"; 
-				/*
-				if (cuisine.search("Chinese") == 0) {
-					cuisine += "Chinese|"; 
-				}
-				*/	
-			}
-
-			if (pref[4].japanese) { 
-				cuisine += "Japanese|";
-				/*
-				if (cuisine.search("Japanese") == 0) {
-					cuisine += "Japanese|";
-				}
-				*/	 
-			}
-
-		}
+		cuisine = determineCuisine(eventDetails);
 
 		console.log(cuisine);
-    	
+
+        // Ideally it should be a function
+        // Identify ideal location for the event based on invitees and organizer location
+
+        loc = determineMeetingLocation(eventDetails);
+
     	var returnedResults;
     	
-    	Meteor.call('getRestaurantList', loc, cuisine, 500, function(err, results) {
+    	Meteor.call('getRestaurantList', loc, cuisine, 15000, function(err, results) {
     		console.log("Server responded with ", results);
     		returnedResults = JSON.parse(results.content);
     		//console.log(returnedResults.results);
@@ -96,19 +294,20 @@ Template.schedule.helpers({
 
     'restaurantList' : function() {
 
-
-    	/*
-    	return ([
-    			{ name: "Wendys"},
-    			{ name: "Biaggis"}
-    		    ]);
-    	*/
-
     	/* store the results returned by the API */
 
     	eventDetails.returnedResults = Session.get('returnedResults');
     	return Session.get('returnedResults');
 
+    },
+
+    'showPriceLevel' : function(priceLevel) {
+        switch (priceLevel) {
+            case 1 : return "$";
+            case 2 : return "$$";
+            case 3 : return "$$$";
+            case 4 : return "$$$$";
+        } 
     }
    
 

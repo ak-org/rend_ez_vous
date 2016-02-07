@@ -24,7 +24,7 @@ Meteor.subscribe('profiles', function() {
             },
 
             isMexicanChecked : function () {
-                if (profileDetails[0].cuisine[0].american) {
+                if (profileDetails[0].cuisine[0].mexican) {
                   console.log("Mexican = ", profileDetails[0].cuisine[0])
                   return true;
                 }
@@ -108,8 +108,8 @@ Meteor.subscribe('profiles', function() {
             },
 
 
-            isEdenPrarieChecked: function() {
-                if ((profileDetails[0].city) && (profileDetails[0].city === "Eden Prarie")) {
+            isEdenPrairieChecked: function() {
+                if ((profileDetails[0].city) && (profileDetails[0].city === "Eden Prairie")) {
                        return true;
                    }
                    else {
@@ -204,7 +204,7 @@ Meteor.subscribe('profiles', function() {
             var stpaulSelected = data.find('#StPaul').checked;
             var maplegroveSelected = data.find('#MapleGrove').checked;
             var plymouthSelected = data.find('#Plymouth').checked;
-            var edenprarieSelected = data.find('#EdenPrarie').checked;
+            var edenprairieSelected = data.find('#EdenPrairie').checked;
             var bloomingtonSelected = data.find('#Bloomington').checked;
             var whitebearlakeSelected = data.find('#WhiteBearLake').checked;
             var woodburySelected = data.find('#Woodbury').checked;                                    
@@ -214,7 +214,7 @@ Meteor.subscribe('profiles', function() {
             if (minneapolisSelected) { city = "Minneapolis"; }
             if (stpaulSelected) { city = "St. Paul"; }
             if (plymouthSelected) { city = "Plymouth"; }
-            if (edenprarieSelected) { city = "Eden Prarie"; }
+            if (edenprairieSelected) { city = "Eden Prairie"; }
             if (bloomingtonSelected) { city = "Bloomington"; }
             if (whitebearlakeSelected) { city = "White Bear Lake";}
             if (woodburySelected) { city = "Woodbury"; }

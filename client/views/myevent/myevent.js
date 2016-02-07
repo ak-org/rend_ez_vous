@@ -29,6 +29,15 @@ var eventDetails = {};
 var invitees = new Mongo.Collection(null);
 
 
+
+Template.myevent.onRendered(function() {
+    this.$('.datetimepicker').datetimepicker({
+         viewMode: 'years'
+    });
+});
+
+
+
 Template.myevent.helpers({
     ampm: function(){
         return ["AM", "PM"];
@@ -69,43 +78,6 @@ Template.myevent.helpers({
 
 Template.myevent.events({
 
-
-
-    "change #ampm-select": function (event, template) {
-        ampm = $(event.currentTarget).val();
-        
-        // additional code to do what you want with the category
-    },
-
-    "change #month-select": function (event, template) {
-        month = $(event.currentTarget).val();
-        
-        // additional code to do what you want with the category
-    },
-
-    "change #year-select": function (event, template) {
-        year = $(event.currentTarget).val();
-        
-        // additional code to do what you want with the category
-    },
-
-    "change #hour-select": function (event, template) {
-        hour = $(event.currentTarget).val();
-        
-        // additional code to do what you want with the category
-    },
-
-    "change #min-select": function (event, template) {
-        min = $(event.currentTarget).val();
-       
-        // additional code to do what you want with the category
-    },
-
-    "change #day-select": function (event, template) {
-        day = $(event.currentTarget).val();
-        
-        // additional code to do what you want with the category
-    },
 
     "click #addfriend" : function (event, data) {
         eventname = data.find('#eventName').value;
@@ -151,11 +123,12 @@ Template.myevent.events({
 
     "click #event-next" : function( event, data) {
         
-         var date = "" + month + "/" + day + "/" + year + " at " + hour + ":" + min + " " + ampm;
+         var eventDate = data.find('.set-due-date').value;
          var eventFlag = true;
          var dateFlag = true;
          var inviteeFlag = true;
          eventname = data.find('#eventName').value;
+         
 
 
          console.log("You clicked review restaurants");
@@ -165,9 +138,12 @@ Template.myevent.events({
             eventFalg = false;
          }
 
-         if ( (!month) || (!day) || (!year) || (!hour) || (!min) || (!ampm) ) {
+         if ( eventDate == undefined) {
             console.log("Please specify date and time");
             dateFlag = false;
+         }
+         else {
+            console.log(eventDate);
          }
 
         if (invitees.find().count() < 1) {
@@ -185,7 +161,7 @@ Template.myevent.events({
 
 
             eventDetails.eventname = eventname;
-            eventDetails.date = date;
+            eventDetails.date = eventDate;
             eventDetails.organizer = username;
             eventDetails.organizerLoc = Session.get('organizerLoc');
             eventDetails.organizerCuisinePef = Session.get('organizerCuisinePref');

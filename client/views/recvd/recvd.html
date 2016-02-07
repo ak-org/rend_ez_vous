@@ -5,22 +5,35 @@
       			<h4 class = "list-group-item-heading">
          Incoming Invites
      	 </h4></a>
-  			{{#each invitees}}
+  			{{#each result in invitees}}
    			
    			 
              <li class="list-group-item">
-             <h4><a href="">{{eventDetails.eventname}}              
-             </a></h4>
-            
+             <h4>{{organizerFullName result.eventDetails.organizer}} has sent you an invite for <a href="">{{result.eventDetails.eventname}} </a> on 
+                  {{result.eventDetails.date}}</h4>   
+
+             <!-- restaurant list -->
+             <ul class="list-group">
+                <h5 class="list-group-item active">Restaurant Preference</h5>
+                {{#each item in result.eventDetails.restaurantSelected}}       
+                    
+                      {{listRestaurants trackIndex result.eventDetails.restaurantSelected result.eventDetails}}
+
+                {{/each}}
+
+
+             </ul>
+             <div class="row">
+              <div class="col-md-6">
              		<button type="button" class="btn btn-success btn-lg invite-choices-accept"> Accept
              		</button>
-    
-             	 
+              </div>
+               <div class="col-md-6">  
              		 <button type="button" class="btn btn-danger btn-lg invite-choices-decline"> Decline 
              		  </button>
-
+              </div>
+              </div>    
              </li>
-
    			
   			{{/each}}
         </ul>

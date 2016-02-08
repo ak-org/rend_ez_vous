@@ -16,19 +16,47 @@
              <ul class="list-group">
                 <h5 class="list-group-item active">Restaurant Preference</h5>
                 {{#each item in result.eventDetails.restaurantSelected}}       
+                    {{#if item}}
+                      <li class="list-group-item">
+                          <div class="row">
+                            <div class="col-md-8">
+                               <h4>{{restaurantName @index  result.eventDetails}}</h4>
+                               <h4>{{ratingRanking @index result.eventDetails}}</h4>
+                               <h5>{{restaurantAddress @index result.eventDetails}}</h5>
+                            </div>
+                           
+                              <div class="col-md-4">
+                                <div class="radio">
+                                    <label style="font-size: 1.5em">
+                                        <input type="radio" id="Yes" name="response{{@index}}" value="Yes" checked=true >
+                                        <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                                        Yes
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label style="font-size: 1.5em">
+                                        <input type="radio" id="No" name="response{{@index}}" value="No">
+                                        <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                                        No
+                                    </label>
+                                </div>
+
+                              </div>
+                           </div>
+                      </li>
+                    {{/if}}
                     
-                      {{listRestaurants trackIndex result.eventDetails.restaurantSelected result.eventDetails}}
 
                 {{/each}}
 
 
              </ul>
              <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-6" align="center">
              		<button type="button" class="btn btn-success btn-lg invite-choices-accept"> Accept
              		</button>
               </div>
-               <div class="col-md-6">  
+               <div class="col-md-6" align="center">  
              		 <button type="button" class="btn btn-danger btn-lg invite-choices-decline"> Decline 
              		  </button>
               </div>

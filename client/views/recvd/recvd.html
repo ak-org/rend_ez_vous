@@ -28,14 +28,14 @@
                               <div class="col-md-4">
                                 <div class="radio">
                                     <label style="font-size: 1.5em">
-                                        <input type="radio" id="Yes" name="response{{@index}}" value="Yes" checked=true >
+                                        <input type="radio" id="responseYes{{@index}}" name="response{{@index}}" value="Yes" checked=true>
                                         <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
                                         Yes
                                     </label>
                                 </div>
                                 <div class="radio">
                                     <label style="font-size: 1.5em">
-                                        <input type="radio" id="No" name="response{{@index}}" value="No">
+                                        <input type="radio" id="responseNo{{@index}}" name="response{{@index}}" value="No">
                                         <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
                                         No
                                     </label>
@@ -53,11 +53,13 @@
              </ul>
              <div class="row">
               <div class="col-md-6" align="center">
-             		<button type="button" class="btn btn-success btn-lg invite-choices-accept"> Accept
+             		<button type="button" class="btn btn-success btn-lg invite-choices-accept" id={{@index}}> Accept
              		</button>
+                {{updateVotes @index result._id result.eventDetails}}
               </div>
+
                <div class="col-md-6" align="center">  
-             		 <button type="button" class="btn btn-danger btn-lg invite-choices-decline"> Decline 
+             		 <button type="button" class="btn btn-danger btn-lg invite-choices-decline" id={{@index}}> Decline 
              		  </button>
               </div>
               </div>    

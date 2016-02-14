@@ -6,7 +6,7 @@ Meteor.subscribe('events', function() {
 });
 
 Meteor.subscribe('profiles', function() {
-  console.log("Number of Events = "  + Profiles.find({}).count() );
+  console.log("Number of Profiles = "  + Profiles.find({}).count() );
 });
 
 
@@ -18,19 +18,57 @@ Template.sent.onRendered(function() {
 
 Template.sent.helpers({
     eventList : function() {
-        
+        console.log("Inside eventlist");
         userEvents = Events.find({"eventDetails.organizer" : Meteor.user().username});
-            //console.log(userEvents.collection);
+        console.log(Events.find({"eventDetails.organizer" : Meteor.user().username}).count(), userEvents.collection);
             return  userEvents;
         },
 
-    restaurantName : function(index, eventDetails) {
-      return eventDetails.returnedResults[index].name;
-    },    
+    eventStatus : function(eventDetails) {
+      var acceptCount = 0;
+     
+      for (var index=0;index < eventDetails.inviteeCount; index++) {
+           if (eventDetails.invitees[index].response == "Accepted") {
+              acceptCount++;
+           }
+      }
+
+      if (eventDetails.inviteeCount == acceptCount) {
+        return "Confirmed";
+      }
+      else {
+        return "Pending Confirmation";
+      }
+    },
 
     totalEvents : function () {
            return Events.find({"eventDetails.organizer" : Meteor.user().username}).count() ;
-    }        
+    },
+
+
+    findRestaurantName : function(eventDetails) {
+      console.log("event details" , eventDetails); 
+      var restaurantList = "";
+      for (var index=0; index < eventDetails.pickedRestaurants.length; index++) {
+          restaurantList += "<h4>" + eventDetails.pickedRestaurants[index].name + "</h4>"
+      }
+      console.log(restaurantList);
+      return restaurantList;
+    },    
+
+
+    findVoteCount : function (eventDetails) {
+      console.log("Inside find vote count ", eventDetails);
+      var voteList = "";
+      for (var index=0; index < eventDetails.pickedRestaurantsVote.length; index++) {
+          if (eventDetails.pickedRestaurantsVote[index]) {
+              voteList += "<h4>" + eventDetails.pickedRestaurantsVote[index] + "</h4>";
+          }
+          
+      }
+      console.log(voteList);
+      return voteList;
+    }      
     
   });
 

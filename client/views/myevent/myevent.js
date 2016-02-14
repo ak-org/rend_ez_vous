@@ -84,11 +84,18 @@ Template.myevent.events({
         contactname = data.find('#friendname').value;
         username = data.find('#username').value;
 
+
         res1 = Friends.find({username : username, contactname : contactname}).fetch();
         res2 = Family.find({username : username, contactname : contactname}).fetch();
         res3 = CoWorkers.find({username : username, contactname : contactname}).fetch();
-       
+        
+        var userVotes = new Array(20);
+        console.log("User Votes ",  userVotes);
 
+        for (var i=0; i < userVotes.length; i++) {
+          userVotes[i] = false;
+        }
+        console.log("User Votes ",  userVotes);
         
 
     	if ( (res1.length > 0) || 
@@ -107,7 +114,8 @@ Template.myevent.events({
                 Session.set('organizerLoc', orgLoc[0].city);
                 Session.set('organizerCuisinePref', orgLoc[0].cuisine);
                 console.log(realname[0].realname);
-                invitees.insert({name : contactname, realname : realname[0].realname, loc : realname[0].city, cuisine: realname[0].cuisine, response : 'NoResponse'});
+                console.log("User Votes ",  userVotes);
+                invitees.insert({name : contactname, realname : realname[0].realname, loc : realname[0].city, cuisine: realname[0].cuisine, votes : userVotes, response : 'NoResponse'});
                 console.log("Added " + contactname + " to the invitee list!");
                 console.log("Invitees for  your event " , invitees.find().count());
             }
@@ -168,7 +176,7 @@ Template.myevent.events({
             eventDetails.inviteeCount = invitees.find().count();
             eventDetails.invitees = invitees.find().fetch();
 
-            console.log(eventDetails);
+            console.log(eventDetails.invitees);
 
             Session.set('eventDetails', eventDetails);
             Router.go('schedule');

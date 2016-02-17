@@ -51,6 +51,43 @@ Template.recvd.onRendered(function() {
               return eventDetails.returnedResults[index].formatted_address;
         },
 
+        isResponseYes : function (myindex, eventDetails) {
+          var retFlag;
+          for (var index = 0; index < eventDetails.inviteeCount; index++) {
+             if ( (eventDetails.invitees[index].name ==  Meteor.user().username) )
+             {
+                  if (eventDetails.invitees[index].votes[myindex] == true) {
+                    retFlag = true;
+                  }
+                  else {
+                    retFlag = false;
+                  } 
+                  break; 
+             }
+          }
+          console.log("isReponseYes is ", retFlag);
+          return retFlag;
+        },
+
+        isResponseNo : function (myindex, eventDetails) {
+          var retFlag;
+          for (var index = 0; index < eventDetails.inviteeCount; index++) {
+             if ( (eventDetails.invitees[index].name ==  Meteor.user().username) )
+             {
+                  if (eventDetails.invitees[index].votes[myindex] == false) {
+                    retFlag = true;
+                  }
+                  else {
+                    retFlag = false;
+                  }
+                  break;  
+             }
+          }
+          console.log("isReponseNo is ", retFlag);
+          return retFlag;
+        },
+
+
         updateVotes: function(index, id, eventDetails) {
 
           var updatedVotesSession = "updatedVotes"+index;

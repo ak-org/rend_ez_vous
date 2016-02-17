@@ -15,7 +15,7 @@
              <!-- restaurant list -->
              <ul class="list-group">
                 <h5 class="list-group-item active">Restaurant Preference</h5>
-                {{#each item in result.eventDetails.restaurantSelected}}       
+                {{#each item in result.eventDetails.pickedRestaurants}}       
                     {{#if item}}
                       <li class="list-group-item">
                           <div class="row">
@@ -28,14 +28,14 @@
                               <div class="col-md-4">
                                 <div class="radio">
                                     <label style="font-size: 1.5em">
-                                        <input type="radio" id="responseYes{{@index}}" name="response{{@index}}" value="Yes" checked=true>
+                                        <input type="radio" id="responseYes{{@index}}" name="response{{@index}}" value="Yes" checked="{{isResponseYes @index result.eventDetails}}">
                                         <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
                                         Yes
                                     </label>
                                 </div>
                                 <div class="radio">
                                     <label style="font-size: 1.5em">
-                                        <input type="radio" id="responseNo{{@index}}" name="response{{@index}}" value="No">
+                                        <input type="radio" id="responseNo{{@index}}" name="response{{@index}}" value="No" checked="{{isResponseNo @index result.eventDetails}}">
                                         <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
                                         No
                                     </label>

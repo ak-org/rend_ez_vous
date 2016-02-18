@@ -19,7 +19,7 @@ Template.sent.onRendered(function() {
 Template.sent.helpers({
     eventList : function() {
         console.log("Inside eventlist");
-        userEvents = Events.find({"eventDetails.organizer" : Meteor.user().username});
+        userEvents = Events.find({"eventDetails.organizer" : Meteor.user().username},{sort: {_id: 1}});
         console.log(Events.find({"eventDetails.organizer" : Meteor.user().username}).count(), userEvents.collection);
             return  userEvents;
         },

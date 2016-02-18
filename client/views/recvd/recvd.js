@@ -23,7 +23,7 @@ Template.recvd.onRendered(function() {
 	  // This code only runs on the client
   Template.recvd.helpers({
         invitees: function() {
-          recvdEvents = Events.find({"eventDetails.invitees.name" : Meteor.user().username});
+          recvdEvents = Events.find({"eventDetails.invitees.name" : Meteor.user().username}, {sort: {_id: 1}});
             //console.log(userEvents.collection);
             //console.log(recvdEvents);
             return  recvdEvents;
@@ -87,6 +87,23 @@ Template.recvd.onRendered(function() {
           return retFlag;
         },
 
+        rsvpStatus: function(index, id, eventDetails) {
+            for (var index = 0; index < eventDetails.inviteeCount; index++) {
+             if ( (eventDetails.invitees[index].response ==  "Accepted") )
+             {  
+                  return "accepted";
+              }
+             if ( (eventDetails.invitees[index].response ==  "Declined") )
+             {  
+                  return "declined";
+             }
+             if ( (eventDetails.invitees[index].response ==  "NoResponse") )
+             {  
+                  return "not responded to";
+             }
+
+            }
+        },
 
         updateVotes: function(index, id, eventDetails) {
 
@@ -240,33 +257,43 @@ Template.recvd.onRendered(function() {
 
 
     'click .invite-choices-decline' : function (e, data) {
-          var idToUpdate = Session.get('updateVotesId');
-          var updateEventDetails = Session.get('updateVotes');
+
+          var thisId = $(e.target).attr("id");
+          var updatedVotesSession = "updatedVotes"+thisId;
+          var updatedVotesId = "updatedVotesId"+thisId;
+
+          console.log(e,thisId, updatedVotesSession, updatedVotesId );
+          
+          var updateEventDetails = Session.get(updatedVotesSession);
+          var idToUpdate = Session.get(updatedVotesId);
+          console.log("Event details");
+          console.log( updateEventDetails, idToUpdate );
+
 
           if (updateEventDetails.invitees[0].response == "Declined") {
              alert("You have already declined the event");
+
           }
           else {
 
 
              for (var index=0; index < updateEventDetails.inviteeCount; index++) {
                   if (updateEventDetails.invitees[0].name ==  Meteor.user().username) {
-                console.log('Changed accept to declined');
+                console.log('You have declined this event!');
                 updateEventDetails.invitees[0].response = "Declined";
                 }
               } 
 
+              Events.update(idToUpdate, {$set : { "eventDetails.invitees" : updateEventDetails.invitees }}, function(error) {
+                                                console.log("update results = " , error);
+              });
+
+              alert("Sorry, You can't make it. You can accept this invite again, if you chane your mind.");
+
           }
    
           
-          Events.update(idToUpdate, {$set : { "eventDetails.invitees" : updateEventDetails.invitees }}, function(error) {
-                                                console.log("update results = " , error);
-     
 
-      //console.log("You declined the event", e, data);
-          });
-
-          alert("Sorryou can't make it. You can accept invite if you chane your mind.");
      }
 
    });

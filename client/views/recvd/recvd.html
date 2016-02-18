@@ -10,7 +10,8 @@
    			 
              <li class="list-group-item">
              <h4>{{organizerFullName result.eventDetails.organizer}} has sent you an invite for <a href="">{{result.eventDetails.eventname}} </a> on 
-                  {{result.eventDetails.date}}</h4>   
+                  {{result.eventDetails.date}}</h4>  
+            <h4>You have {{rsvpStatus @index result._id result.eventDetails}} this event.</h4>  
 
              <!-- restaurant list -->
              <ul class="list-group">

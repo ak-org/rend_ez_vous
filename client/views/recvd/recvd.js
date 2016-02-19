@@ -105,13 +105,13 @@ Template.recvd.onRendered(function() {
             }
         },
 
-        updateVotes: function(index, id, eventDetails) {
+        updateVotes: function(index, id, result) {
 
           var updatedVotesSession = "updatedVotes"+index;
           var updatedVotesId = "updatedVotesId"+index;
-          Session.set(updatedVotesSession, eventDetails);
+          Session.set(updatedVotesSession, result);
           Session.set(updatedVotesId, id);
-          console.log("Update Votes ", index, id, eventDetails);
+          console.log("Update Votes ", index, id, result);
           console.log(updatedVotesSession, updatedVotesId);
         }
       
@@ -130,9 +130,10 @@ Template.recvd.onRendered(function() {
 
       console.log(e,thisId, updatedVotesSession, updatedVotesId );
       
-      var updateEventDetails = Session.get(updatedVotesSession);
+      var results = Session.get(updatedVotesSession);
+      var updateEventDetails = results.eventDetails;
       var idToUpdate = Session.get(updatedVotesId);
-      console.log("Event details");
+      console.log("Event details", thisId);
       console.log( updateEventDetails, idToUpdate );
 
       //var rejectedRestaurant = [];
@@ -162,8 +163,8 @@ Template.recvd.onRendered(function() {
       }
 
       for (var index = 0; index < 20; index++ ) {
-         var idYes = '#responseYes'  + index;
-         var idNo = '#responseNo' + index;
+         var idYes = '#' + index + 'responseYes'  + results._id;
+         var idNo = '#' + index + 'responseNo'  + results._id;
          if (data.find(idYes) != null) {
             acceptedRestaurant[index] = data.find(idYes).checked;
             if (acceptedRestaurant[index] == true) {
@@ -245,10 +246,10 @@ Template.recvd.onRendered(function() {
             });
 
        
-   
+            alert("Thanks for accepting the Invite");
 
         }
-        alert("Thanks for accepting the Invite");
+        
 
 
  

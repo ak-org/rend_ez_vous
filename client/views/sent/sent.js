@@ -56,6 +56,24 @@ Template.sent.helpers({
       return restaurantList;
     },    
 
+    isEventConfirmed : function(eventDetails) {
+      var acceptCount = 0;
+     
+      for (var index=0;index < eventDetails.inviteeCount; index++) {
+           if (eventDetails.invitees[index].response == "Accepted") {
+              acceptCount++;
+           }
+      }
+
+      if (eventDetails.inviteeCount == acceptCount) {
+        return true;
+      }
+      else {
+        return false;
+      }
+
+      
+    },
 
     findVoteCount : function (eventDetails) {
       console.log("Inside find vote count ", eventDetails);
@@ -72,5 +90,18 @@ Template.sent.helpers({
     
   });
 
+
+Template.sent.events({
+    'click button' : function(e, tmpl) {
+      var thisId = $(e.target).attr("id");
+      alert("You click this id " + thisId);
+
+      // find the organizer name
+      // find the invitees 
+      // create email text
+    }
+
+
+});
 
 

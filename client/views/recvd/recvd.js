@@ -268,24 +268,24 @@ Template.recvd.onRendered(function() {
           var updateEventDetails = Session.get(updatedVotesSession);
           var idToUpdate = Session.get(updatedVotesId);
           console.log("Event details");
-          console.log( updateEventDetails, idToUpdate );
+          //console.log( updateEventDetails, idToUpdate );
 
-
-          if (updateEventDetails.invitees[0].response == "Declined") {
+          console.log("Response = ", updateEventDetails.eventDetails);
+          if (updateEventDetails.eventDetails.invitees[0].response == "Declined") {
              alert("You have already declined the event");
 
           }
           else {
 
 
-             for (var index=0; index < updateEventDetails.inviteeCount; index++) {
-                  if (updateEventDetails.invitees[0].name ==  Meteor.user().username) {
+             for (var index=0; index < updateEventDetails.eventDetails.inviteeCount; index++) {
+                  if (updateEventDetails.eventDetails.invitees[index].name ==  Meteor.user().username) {
                 console.log('You have declined this event!');
-                updateEventDetails.invitees[0].response = "Declined";
+                updateEventDetails.eventDetails.invitees[index].response = "Declined";
                 }
               } 
 
-              Events.update(idToUpdate, {$set : { "eventDetails.invitees" : updateEventDetails.invitees }}, function(error) {
+              Events.update(idToUpdate, {$set : { "eventDetails.invitees" : updateEventDetails.eventDetails.invitees }}, function(error) {
                                                 console.log("update results = " , error);
               });
 

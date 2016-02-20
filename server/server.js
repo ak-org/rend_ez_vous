@@ -51,5 +51,22 @@ Meteor.methods({
 		return results;
 
 
-	}
+	},
+
+
+	'get_user_by_username': function(username) {
+		    //console.log("Received username " + username);
+            return Accounts.findUserByUsername(username);
+     },
+
+     'sendInvites' : function(emailObj) {
+     	Email.send({
+			from: emailObj.sendFrom,
+			to: emailObj.sendTo,
+			subject: emailObj.subject,
+			html: emailObj.content
+		});
+		console.log("returning from sendinvites");
+
+     }
 })

@@ -94,7 +94,7 @@ Template.sent.helpers({
 Template.sent.events({
     'click button' : function(e, tmpl) {
       var thisId = $(e.target).attr("id");
-      alert("You click this id " + thisId);
+      //alert("You click this id " + thisId);
 
       // find the organizer name
       // find the invitees 

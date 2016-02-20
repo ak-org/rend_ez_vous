@@ -299,29 +299,3 @@ Template.recvd.onRendered(function() {
 
    });
 
-
-function ratingSymbol(index, eventDetails) {
-        var response = "";
-               var tracker = index;
-               if (eventDetails.returnedResults[tracker].rating) {
-                  response += "Rating " + eventDetails.returnedResults[tracker].rating + "/5, ";
-               }
-
-               switch (eventDetails.returnedResults[tracker].price_level) {
-                case 1: 
-                   response += " $ ";
-                   break;
-                case 2 :
-                   response += " $$ ";
-                   break;
-                case 3 :
-                   response += " $$$ ";
-                   break;
-                case 4 :
-                   response += " $$$$ ";
-                   break;
-
-               }
-        return response;
-
-}

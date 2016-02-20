@@ -208,24 +208,4 @@ function findVenue(eventDetails) {
 }
 
 
-function ratingSymbol(price_level) {
-               var response = "";
-               
-               switch (price_level) {
-                case 1: 
-                   response += " $ ";
-                   break;
-                case 2 :
-                   response += " $$ ";
-                   break;
-                case 3 :
-                   response += " $$$ ";
-                   break;
-                case 4 :
-                   response += " $$$$ ";
-                   break;
 
-               }
-        return response;
-
-}

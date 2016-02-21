@@ -8,7 +8,7 @@ Template.register.onRendered( function() {
         },
         username : {
                 required: true,
-                minlength : 8
+                minlength : 6
         },
         email: {
                 required: true,

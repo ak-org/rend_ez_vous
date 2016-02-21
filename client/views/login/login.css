@@ -151,3 +151,8 @@
 	background-color: #1CA347;
 	border-color: #1CA347;
 }
+
+
+input.error{
+    background-color:rgb(255, 231, 231);
+}

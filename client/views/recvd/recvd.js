@@ -41,7 +41,7 @@ Template.recvd.onRendered(function() {
 
         ratingRanking : function(index, eventDetails) {
 
-               return ratingSymbol(index, eventDetails);
+               return ratingSymbol(eventDetails.pickedRestaurants[index].price_level);
 
 
                

@@ -1,0 +1,183 @@
+<template name="profileSF">
+
+{{#if  currentUser}}
+
+{{> navbar}}
+{{#if currentProfile}}
+
+{{/if}}
+ <div class="container">
+
+	<h2>Hello {{currentUser.profile.realname}}, Let's update your profile</h2>
+    <input type="hidden" name="username" id="username" value={{currentUser.username}}>
+	<!-- Cuisine Prefernces -->
+
+	<h2>Cuisine Preferences</h2>
+
+    <div class="col-sm-12">
+	    <div class="checkbox">
+	            <label style="font-size: 1.5em">
+	                <input type="checkbox" name="cuisine" id="american"
+                    value="american" checked="{{isAmericanChecked}}">
+	                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+	                American
+	            </label>
+	    </div>
+
+	   <div class="checkbox">
+	            <label style="font-size: 1.5em">
+	                <input type="checkbox" name="cuisine" id="italian" 
+                            value="italian" checked="{{isItalianChecked}}">
+	                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+	                Italian
+	            </label>
+	    </div>
+
+
+	   <div class="checkbox">
+	            <label style="font-size: 1.5em">
+	                <input type="checkbox" name="cuisine" id = "chinese" 
+                    value="chinese" 
+                    checked="{{isChineseChecked}}">
+	                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+	                Chinese
+	            </label>
+	    </div>
+
+	    <div class="checkbox">
+	            <label style="font-size: 1.5em">
+	                <input type="checkbox" name="cuisine" id="japanese" 
+                    value="japanese" checked="{{isJapaneseChecked}}">
+	                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+	                Japanese
+	            </label>
+	    </div>
+
+
+	    <div class="checkbox">
+	            <label style="font-size: 1.5em">
+	                <input type="checkbox" name="cuisine" id="mexican" 
+                    value="mexican" checked="{{isMexicanChecked}}">
+	                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+	                Mexican
+	            </label>
+	    </div>
+    </div>
+	
+	<!-- Distance Prefernces -->
+	<h2>Distance preferences</h2>	
+    <div class="col-sm-12">
+    	<div class="radio">
+            <label style="font-size: 1.5em">
+                <input type="radio" id="walk" name = "distance" value="1" checked="{{walkOption}}">
+                <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                Walkable ( less than a mile )
+            </label>
+        </div>
+
+        <div class="radio">
+            <label style="font-size: 1.5em">
+                <input type="radio" id="shortDrive" name = "distance"  value="2" checked="{{shortDriveOption}}">
+                <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                Short Drive ( Upto 5 miles )
+            </label>
+        </div>
+
+        <div class="radio">
+            <label style="font-size: 1.5em">
+                <input type="radio" id="drive" name = "distance" value="3" checked="{{justDriveOption}}">
+                <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                I don't mind Driving 
+            </label>
+        </div>           	
+    </div>
+
+
+ <!-- Select location -->
+ 	<h2>Location</h2>	
+    <h4>Pick the closest city, if your city is not listed below.</h4>    
+    <div class="col-sm-12">
+    <div class = "col-sm-6">
+        <div class="radio">
+            <label style="font-size: 1.5em">
+                <input type="radio" id="Berkeley" name="city" value="Berkeley" checked="{{isBerkeleyChecked}}" >
+                <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                Berkeley
+            </label>
+        </div>
+        <div class="radio">
+            <label style="font-size: 1.5em">
+                <input type="radio" id="SanFrancisco" name="city" value="SanFrancisco" checked="{{isSanFranciscoChecked}}">
+                <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                San Francisco
+            </label>
+        </div>
+        <div class="radio">
+            <label style="font-size: 1.5em">
+                <input type="radio" id="SanMateo" name="city" value="SanMateo" checked="{{isSanMateoChecked}}">
+                <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                San Mateo
+            </label>
+        </div>
+        <div class="radio">
+            <label style="font-size: 1.5em">
+                <input type="radio" id="Oakland" name="city" value="Oakland" checked="{{isOaklandChecked}}">
+                <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                Oakland
+            </label>
+        </div>
+    </div>
+
+    <div class = "col-sm-6">
+        
+         <div class="radio">
+            <label style="font-size: 1.5em">
+                <input type="radio" id="Danville" name="city" value="Danville" checked="{{isDanvilleChecked}}">
+                <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                Danville
+            </label>
+        </div>
+        <div class="radio">
+            <label style="font-size: 1.5em">
+                <input type="radio" id="Dublin" name="city" value="Dublin" checked="{{isDublinChecked}}">
+                <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                Dublin
+            </label>
+        </div>
+        <div class="radio">    
+            <label style="font-size: 1.5em">
+                <input type="radio" id="Orinda" name="city" value="Orinda" checked="{{isOrindaChecked}}">
+                <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                Orinda
+            </label>
+        </div>
+        <div class="radio">
+            <label style="font-size: 1.5em">
+                <input type="radio" id="WalnutCreek" name="city" value="WalnutCreek" checked="{{isWalnutCreekChecked}}">
+                <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                Walnut Creek
+            </label>
+        </div>
+       
+    </div>
+	
+    </div>
+  
+  <!-- Save the profile -->
+
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+ 
+    	<button type="button" class="btn btn-primary btn-lg btn-block" id="profile-save">Save Profile</button>
+	</div>
+	<div class="col-md-4"></div>
+ </div>
+
+{{> footer}} 
+
+{{else}}  
+    {{> login}}
+{{/if}}
+
+
+</template>	

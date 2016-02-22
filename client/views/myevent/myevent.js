@@ -24,6 +24,7 @@ var username;
 var res1, res2, res3;
 var eventname;
 var eventDetails = {};
+var orgLoc;
 
 // local object to make the invitee list dynamic 
 var invitees = new Mongo.Collection(null);
@@ -110,7 +111,7 @@ Template.myevent.events({
             }
             else {
                 realname = Profiles.find({username: contactname}).fetch();
-                var orgLoc = Profiles.find({username: username}).fetch();
+                orgLoc = Profiles.find({username: username}).fetch();
                 Session.set('organizerLoc', orgLoc[0].city);
                 Session.set('organizerCuisinePref', orgLoc[0].cuisine);
                 console.log(realname[0].realname);
@@ -179,7 +180,18 @@ Template.myevent.events({
             console.log(eventDetails.invitees);
 
             Session.set('eventDetails', eventDetails);
-            Router.go('schedule');
+
+            if (orgLoc[0].state == "MN") {
+                Router.go('schedule');
+            }
+            else  if (orgLoc[0].state == "CA") {
+                Router.go('scheduleSF');
+            }
+            else {
+                console.log("Comong soon!!");
+            }
+
+            
 
         }
 

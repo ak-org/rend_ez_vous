@@ -13,7 +13,7 @@ Meteor.subscribe('profiles', function() {
 });
 
 
-    Template.profile.helpers({
+    Template.profileSF.helpers({
 
             currentProfile : function() {
                 username = Meteor.user().username;
@@ -70,8 +70,8 @@ Meteor.subscribe('profiles', function() {
                 }
             },
 
-            isMinneapolisChecked: function() {
-                if ((profileDetails[0]) && (profileDetails[0].city === "Minneapolis")) {
+            isBerkeleyChecked: function() {
+                if ((profileDetails[0]) && (profileDetails[0].city === "Berkeley")) {
                        return true;
                    }
                    else {
@@ -80,8 +80,8 @@ Meteor.subscribe('profiles', function() {
             },
 
 
-            isStPaulChecked: function() {
-                if ((profileDetails[0]) && (profileDetails[0].city === "St. Paul")) {
+            isSanFranciscoChecked: function() {
+                if ((profileDetails[0]) && (profileDetails[0].city === "San Francisco")) {
                        return true;
                    }
                    else {
@@ -89,8 +89,8 @@ Meteor.subscribe('profiles', function() {
                    }
             },
 
-            isMapleGroveChecked: function() {
-                if ((profileDetails[0]) && (profileDetails[0].city === "Maple Grove")) {
+            isSanMateoChecked: function() {
+                if ((profileDetails[0]) && (profileDetails[0].city === "San Mateo")) {
                        return true;
                    }
                    else {
@@ -98,8 +98,8 @@ Meteor.subscribe('profiles', function() {
                    }
             },
 
-            isPlymouthChecked : function() {
-              if ((profileDetails[0]) && (profileDetails[0].city === "Plymouth")) {
+            isOaklandChecked : function() {
+              if ((profileDetails[0]) && (profileDetails[0].city === "Oakland")) {
                        return true;
                    }
                    else {
@@ -108,8 +108,8 @@ Meteor.subscribe('profiles', function() {
             },
 
 
-            isEdenPrairieChecked: function() {
-                if ((profileDetails[0]) && (profileDetails[0].city === "Eden Prairie")) {
+            isDanvilleChecked: function() {
+                if ((profileDetails[0]) && (profileDetails[0].city === "Danville")) {
                        return true;
                    }
                    else {
@@ -117,8 +117,8 @@ Meteor.subscribe('profiles', function() {
                    }
             },  
 
-            isBloomingtonChecked: function() {
-                if ((profileDetails[0]) && (profileDetails[0].city === "Bloomington")) {
+            isDublinChecked: function() {
+                if ((profileDetails[0]) && (profileDetails[0].city === "Dublin")) {
                        return true;
                    }
                    else {
@@ -126,8 +126,8 @@ Meteor.subscribe('profiles', function() {
                    }
             },
 
-            isWhiteBearLakeChecked: function () {
-                if ((profileDetails[0]) && (profileDetails[0].city === "White Bear Lake")) {
+            isOrindaChecked: function () {
+                if ((profileDetails[0]) && (profileDetails[0].city === "Orinda")) {
                        return true;
                    }
                    else {
@@ -135,8 +135,8 @@ Meteor.subscribe('profiles', function() {
                    }
             },
 
-            isWoodburyChecked: function() {
-                if ((profileDetails[0]) && (profileDetails[0].city === "Woodbury")) {
+            isWalnutCreekChecked: function() {
+                if ((profileDetails[0]) && (profileDetails[0].city === "Walnut Creek")) {
                        return true;
                    }
                    else {
@@ -175,7 +175,7 @@ Meteor.subscribe('profiles', function() {
     });
 
 
-    Template.profile.events({
+    Template.profileSF.events({
 
         'click #profile-save' : function(e, data) {
 
@@ -183,10 +183,12 @@ Meteor.subscribe('profiles', function() {
             var city ;
             var distance; 
             
-            var state = "MN";
+            var state = "CA"  ;
 
             // cuisine selection
+            console.log('state is CA');
             var username = data.find('#username').value;
+
             var americanSelected = data.find('#american').checked;
             var italianSelected = data.find('#italian').checked;
             var chineseSelected = data.find('#chinese').checked;
@@ -200,25 +202,25 @@ Meteor.subscribe('profiles', function() {
 
             // City selection
 
-            var minneapolisSelected = data.find('#Minneapolis').checked;
-            var stpaulSelected = data.find('#StPaul').checked;
-            var maplegroveSelected = data.find('#MapleGrove').checked;
-            var plymouthSelected = data.find('#Plymouth').checked;
-            var edenprairieSelected = data.find('#EdenPrairie').checked;
-            var bloomingtonSelected = data.find('#Bloomington').checked;
-            var whitebearlakeSelected = data.find('#WhiteBearLake').checked;
-            var woodburySelected = data.find('#Woodbury').checked;                                    
+            var berkeleySelected = data.find('#Berkeley').checked;
+            var sanfranciscoSelected = data.find('#SanFrancisco').checked;
+            var sanmateoSelected = data.find('#SanMateo').checked;
+            var oaklandSelected = data.find('#Oakland').checked;
+            var danvilleSelected = data.find('#Danville').checked;
+            var dublinSelected = data.find('#Dublin').checked;
+            var orindaSelected = data.find('#Orinda').checked;
+            var walnutcreekSelected = data.find('#WalnutCreek').checked;                                    
             var realname = Meteor.users.find({username: username}).fetch();
             console.log("Real name = " , realname[0].profile.realname);
             
-            if (minneapolisSelected) { city = "Minneapolis"; }
-            if (stpaulSelected) { city = "St. Paul"; }
-            if (plymouthSelected) { city = "Plymouth"; }
-            if (edenprairieSelected) { city = "Eden Prairie"; }
-            if (bloomingtonSelected) { city = "Bloomington"; }
-            if (whitebearlakeSelected) { city = "White Bear Lake";}
-            if (woodburySelected) { city = "Woodbury"; }
-            if (maplegroveSelected) { city = "Maple Grove";}
+            if (berkeleySelected) { city = "Berkeley"; }
+            if (sanfranciscoSelected) { city = "San Francisco"; }
+            if (sanmateoSelected) { city = "San Mateo"; }
+            if (oaklandSelected) { city = "Oakland"; }
+            if (danvilleSelected) { city = "Danville"; }
+            if (dublinSelected) { city = "Dublin";}
+            if (orindaSelected) { city = "Orinda"; }
+            if (walnutcreekSelected) { city = "Walnut Creek"; }
             
 
             if (walkSelected) { distance = 1; }
@@ -250,7 +252,7 @@ Meteor.subscribe('profiles', function() {
                                   { japanese : japaneseSelected}
                                 ],
                                 city : city,
-                                metro: "twincities",
+                                metro: "sanfrancisco",
                                 state : state,
                                 distance : distance,
                                 realname : realname[0].profile.realname,
@@ -271,7 +273,7 @@ Meteor.subscribe('profiles', function() {
                           { japanese : japaneseSelected}
                         ],
                      city : city,
-                     metro: "twincities",
+                     metro: "sanfrancisco",
                      state: state,
                      distance : distance,
 

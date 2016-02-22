@@ -1,0 +1,65 @@
+<template name="scheduleSF">
+
+
+
+<div class="container-fluid">
+	<ul class="list-group">
+		<a href = "" class = "list-group-item active">
+      			<h4 class = "list-group-item-heading">
+         Select Venue for <strong>{{eventname}}</strong> on {{eventdate}}
+     	 </h4></a>
+
+	
+	
+		<li class="list-group-item">
+		<h4>
+			{{#each invitees}}
+				{{realname}},
+			
+			{{/each}}		
+
+		</h4>
+		</li>
+	</ul>	
+
+	<ul class="list-group">
+		<a href = "" class = "list-group-item active">
+      			<h4 class = "list-group-item-heading">
+         Pick Restaurant </h4></a>	
+
+		{{#each restaurantList}}
+		<div class="checkbox">
+		<li class="list-group-item">
+			<label style="font-size: 1.5em" class="restaurantChoice" id={{@index}}>
+	                <input type="checkbox" name="restaurantChoice" id="restaurantOption" >
+	                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+			<h4 class={{@index}}>{{name}}</h4>
+		        {{#if rating}}	
+			<h6>User Rating : {{rating}}/5</h6>	
+                        {{/if}}
+			<h6>{{formatted_address}}</h6>
+		        {{#if price_level}}	
+			  <h5>{{showPriceLevel price_level}}</h5>
+                        {{/if}}
+			</label>                
+			
+		</li>	
+		</div>
+		{{/each}}
+	</ul>
+
+	 <!-- Save the profile -->
+
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+ 
+    	<button type="button" class="btn btn-primary btn-lg btn-block" id="create-event-sf">Create Event</button>
+	</div>
+	<div class="col-md-4"></div>
+
+
+
+
+</div>
+
+</template>

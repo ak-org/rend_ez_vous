@@ -50,14 +50,22 @@ Template.register.onRendered( function() {
 
 	Template.register.events({
         'submit #register-form' : function(e, data) {
+              var loc;
               e.preventDefault();
+
+              var twincitiesSelected = data.find('#twincities').checked;
+              var sanfranciscoSelected = data.find('#sanfrancisco').checked;
+
+              if (twincitiesSelected == true) { loc = "twincities"; }
+              if (sanfranciscoSelected == true) { loc = "sanfrancisco"; }
 
               Accounts.createUser({
               	username: data.find('#username').value,
               	password: data.find('#password').value,
               	email: data.find('#email').value,
               	profile: {
-              		realname: data.find('#realname').value
+              		realname: data.find('#realname').value,
+                  loc: loc
 
               	}
               }, function (err) {
@@ -67,8 +75,15 @@ Template.register.onRendered( function() {
               	   }
               	   else   {
               	   	   
-                       console.log('Registgration Successful');
-                       Router.go('profile')
+                       console.log('Registgration Successful', loc);
+
+                       if (loc == "twincities") {
+                          Router.go('profile');
+                       } 
+                       if (loc == "sanfrancisco") {
+                          Router.go('profileSF');
+                       }
+                       
               	   }	
 
               });

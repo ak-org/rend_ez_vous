@@ -36,7 +36,7 @@ Template.recvd.onRendered(function() {
         },
 
         restaurantName : function(index, eventDetails) {
-              return eventDetails.returnedResults[index].name;
+              return eventDetails.pickedRestaurants[index].name;
         },
 
         ratingRanking : function(index, eventDetails) {

@@ -32,6 +32,17 @@ Meteor.methods({
 			"White Bear Lake" : "45.074722, -92.978056"
 		};
 
+		var locationListSF = {
+			"San Francisco" : "37.7749300,-122.4194200",
+			"San Mateo" : "37.5629900,-122.3255300",
+			"Danville" : "37.8215900,-121.9999600" ,
+			"Dublin" : "37.7021500,-121.9357900" ,
+			"Orinda" : "37.8771500,-122.1796900", 
+			"Oakland" : "37.8043700,-122.2708000",
+			"Walnut Creek" : "37.9063100, -122.0649600",
+			"Berkeley" : "37.8715900, -122.2727500"
+		};
+
 		if (city == "Minneapolis") { location = locationList["Minneapolis"]; }
 		if (city == "St. Paul") { location = locationList["St. Paul"]; }
 		if (city == "Plymouth") { location = locationList["Plymouth"]; }
@@ -40,6 +51,17 @@ Meteor.methods({
 		if (city == "Bloomington") { location = locationList["Bloomington"]; }
 		if (city == "Eden Prairie") { location = locationList["Eden Prairie"]; }
 		if (city == "White Bear Lake") { location = locationList["White Bear Lake"]; }
+
+
+
+		if (city == "San Francisco") { location = locationListSF["San Francisco"] ; }
+		if (city == "San Mateo") { location = locationListSF["San Mateo"] ; }
+		if (city == "Danville") { location = locationListSF["Danville"] ; }		
+		if (city == "Dublin") { location = locationListSF["Dublin"] ; }	
+		if (city == "Oakland") { location = locationListSF["Oakland"] ; }	
+		if (city == "Orinda") { location = locationListSF["Orinda"] ; }		
+		if (city == "Walnut Creek") { location = locationListSF["Walnut Creek"] ; }		
+		if (city == "Berkeley") { location = locationListSF["Berkeley"] ; }					
 
 		var cuisine = cuisine;
 		var radius = radius;
@@ -63,6 +85,7 @@ Meteor.methods({
      	Email.send({
 			from: emailObj.sendFrom,
 			to: emailObj.sendTo,
+			cc: emailObj.sendFrom,
 			subject: emailObj.subject,
 			html: emailObj.content
 		});

@@ -36,6 +36,11 @@ Router.route('/profile', {
 
 });
 
+Router.route('/profileSF', {
+    template: 'profileSF'
+
+});
+
 
 Router.route('messages', function() {
      this.render('messages');
@@ -72,6 +77,12 @@ Router.route('myevent', function() {
 
 Router.route('schedule', function() {
      this.render('schedule');
+     this.layout('landing');
+
+});
+
+Router.route('scheduleSF', function() {
+     this.render('scheduleSF');
      this.layout('landing');
 
 });

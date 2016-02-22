@@ -8,6 +8,14 @@ Meteor.subscribe('events', function() {
 });
 
 
+Meteor.subscribe('profiles', function() {
+
+
+});
+
+
+
+
 Template.landing.helpers({
 	eventSentCount : function() {
 		var sentEvents = Events.find({"eventDetails.organizer" : Meteor.user().username}).count();
@@ -36,6 +44,17 @@ Template.landing.events({
             e.preventDefault();
             Session.set('loggedinusername' , Meteor.user().username);
             console.log("You clicked profile " + " for " + Session.get('loggedinusername'));
-            Router.go('profile')
+            var result = Profiles.find({username: Meteor.user().username}).fetch();
+            console.log(result[0].state);
+            
+            if (result[0].state == "CA") {
+            	Router.go('profileSF');
+            }
+            if (result[0].state == "MN") {
+            	Router.go('profile');
+            }            
+
+
+            
         }
 });

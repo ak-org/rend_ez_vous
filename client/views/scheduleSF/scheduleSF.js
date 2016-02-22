@@ -2,7 +2,7 @@ var eventDetails ;
 
 Meteor.subscribe('events');
 
-var determineCuisine = function (eventDetails) {
+var determineCuisineSF = function (eventDetails) {
         
         var cuisineChoice = "";
         var prefCuisineCount = [0 ,0 ,0, 0, 0];
@@ -79,7 +79,7 @@ var determineCuisine = function (eventDetails) {
 }
 
 
-var determineMeetingLocation = function(eventDetails) {
+var determineMeetingLocationSF = function(eventDetails) {
         
         var returnLoc;
         var locMatrix = [
@@ -91,61 +91,74 @@ var determineMeetingLocation = function(eventDetails) {
         var flag2 = false;
 
        for (var item=0; item < eventDetails.inviteeCount; item++ ) {
-                if (eventDetails.invitees[item].loc === "White Bear Lake") {
-                    locMatrix[0][2]++;
-                }
-                if (eventDetails.invitees[item].loc === "Maple Grove") {
+
+                /*
+                if (eventDetails.invitees[item].loc === "San Francisco") {
                     locMatrix[0][0]++;
                 }
+                */
+                if (eventDetails.invitees[item].loc === "Berkeley") {
+                    locMatrix[0][1]++;
+                }
+                if (eventDetails.invitees[item].loc === "Walnut Creek") {
+                    locMatrix[0][2]++;
+                }
+                
 
 
-                if (eventDetails.invitees[item].loc === "Plymouth") {
+                if (eventDetails.invitees[item].loc === "San Francisco") {
                     locMatrix[1][0]++;
                 }
-                if (eventDetails.invitees[item].loc === "Minneapolis") {
+                if (eventDetails.invitees[item].loc === "Oakland") {
                     locMatrix[1][1]++;
                 }
-                if (eventDetails.invitees[item].loc === "St. Paul") {
+                if (eventDetails.invitees[item].loc === "Danville") {
                     locMatrix[1][2]++;
                 }
 
-                if (eventDetails.invitees[item].loc === "Eden Prairie") {
+                if (eventDetails.invitees[item].loc === "San Mateo") {
                     locMatrix[2][0]++;
                 }
-                if (eventDetails.invitees[item].loc === "Bloomington") {
+                if (eventDetails.invitees[item].loc === "Orinda") {
                     locMatrix[2][1]++;
                 }
-                if (eventDetails.invitees[item].loc === "Woodbury") {
+                if (eventDetails.invitees[item].loc === "Dublin") {
                     locMatrix[2][2]++;
                 }
 
         }
 
-        if (eventDetails.organizerLoc === "White Bear Lake") {
-            locMatrix[0][2]++;
+        if (eventDetails.organizerLoc === "Berkeley") {
+            locMatrix[0][1]++;
         }
+        if (eventDetails.organizerLoc === "Walnut Creek") {
+            locMatrix[0][1]++;
+        }
+
+        /*
         if (eventDetails.organizerLoc === "Maple Grove") {
             locMatrix[0][0]++;
         }
+        */
 
 
-        if (eventDetails.organizerLoc === "Plymouth") {
+        if (eventDetails.organizerLoc === "San Francisco") {
             locMatrix[1][0]++;
         }
-        if (eventDetails.organizerLoc === "Minneapolis") {
+        if (eventDetails.organizerLoc === "Oakland") {
             locMatrix[1][1]++;
         }
-        if (eventDetails.organizerLoc === "St. Paul") {
+        if (eventDetails.organizerLoc === "Danville") {
             locMatrix[1][2]++;
         }
 
-        if (eventDetails.organizerLoc === "Eden Prairie") {
+        if (eventDetails.organizerLoc === "San Mateo") {
             locMatrix[2][0]++;
         }
-        if (eventDetails.organizerLoc === "Bloomington") {
+        if (eventDetails.organizerLoc === "Orinda") {
             locMatrix[2][1]++;
         }
-        if (eventDetails.organizerLoc === "Woodbury") {
+        if (eventDetails.organizerLoc === "Dublin") {
             locMatrix[2][2]++;
         }
 
@@ -154,81 +167,81 @@ var determineMeetingLocation = function(eventDetails) {
         // case #1 all participants are in the same location return that location
 
 
-        if ( locMatrix[0][0] == ( eventDetails.inviteeCount + 1 ) ) {
-            returnLoc = "Maple Grove";
+        if ( locMatrix[0][1] == ( eventDetails.inviteeCount + 1 ) ) {
+            returnLoc = "Berkeley";
             flag1 = true;
         }
         if ( locMatrix[0][2] == ( eventDetails.inviteeCount + 1 ) ) {
-            returnLoc = "White Bear Lake";
+            returnLoc = "Walnut Creek";
             flag1 = true;
         }
 
         if ( locMatrix[1][0] == ( eventDetails.inviteeCount + 1 ) ) {
-            returnLoc= "Plymouth";
+            returnLoc= "San Francisco";
             flag1 = true;            
         }
         if ( locMatrix[1][1] == ( eventDetails.inviteeCount + 1 ) ) {
-            returnLoc = "Minneapolis";
+            returnLoc = "Oakland";
             flag1 = true;        
         }
         if ( locMatrix[1][2] == ( eventDetails.inviteeCount + 1 ) ) {
-            returnLoc = "St. Paul";
+            returnLoc = "Danville";
             flag1 = true;        
         }
      
 
         if ( locMatrix[2][0] == eventDetails.inviteeCount + 1 ) {
-            returnLoc = "Eden Prairie";
+            returnLoc = "San Mateo";
             flag1 = true;            
         }
         if ( locMatrix[2][1] == eventDetails.inviteeCount + 1 ) {
-            returnLoc = "Bloomington";
+            returnLoc = "Orinda";
             flag1 = true;            
         }
         if ( locMatrix[2][2] == eventDetails.inviteeCount + 1 ) {
-            returnLoc = "Woodbury";
+            returnLoc = "Dublin";
             flag1 = true;
         }
 
         
         if (flag1 == false ) {
-            if ((locMatrix[0][0] + locMatrix[0][1] + locMatrix[0][2]) == eventDetails.inviteeCount + 1 ) {
-            returnLoc = "Minneapolis";
+            if ((locMatrix[0][1] + locMatrix[0][1] + locMatrix[0][2]) == eventDetails.inviteeCount + 1 ) {
+            returnLoc = "Orinda";
             flag2 = true;
             }
 
             // All participants are in the east, center or west metro areas 
      
             if ((locMatrix[1][0] + locMatrix[1][1] + locMatrix[1][2]) == eventDetails.inviteeCount + 1 ) {
-                returnLoc = "Minneapolis";
+                returnLoc = "Oakland";
                 flag2 = true;
             }
 
             // All participants are in the south/east, south or south west metro areas 
 
             if ((locMatrix[2][0] + locMatrix[2][1] + locMatrix[2][2]) == eventDetails.inviteeCount + 1 ) {
-                returnLoc = "Bloomington";
+                returnLoc = "Orinda";
                 flag2 = true;
             }
         
             // All participants are in the north west or west or south west areas
 
             if ((locMatrix[0][0] + locMatrix[1][0] + locMatrix[2][0]) == eventDetails.inviteeCount + 1 ) {
-                returnLoc = "Plymouth";
+                returnLoc = "San Francisco";
                 flag2 = true;
             }
 
             // All participants are in the north  or center or southern areas
 
             if ((locMatrix[0][1] + locMatrix[1][1] + locMatrix[2][1]) == eventDetails.inviteeCount + 1 ) {
-                returnLoc= "Minneapolis";
+                returnLoc= "Orinda";
                 flag2 = true;
             }
 
             // All participants are in the south east, east or south west areas
 
             if ((locMatrix[0][2] + locMatrix[1][2] + locMatrix[2][2]) == eventDetails.inviteeCount + 1 ) {
-                returnLoc = "St. Paul";
+                returnLoc = "Danville";
                 flag2 = true;
             }
             
@@ -239,7 +252,7 @@ var determineMeetingLocation = function(eventDetails) {
 
         // For all other cases, we will leave it to minneapolis
         if ( (flag1 == false) && (flag2 == false) ) {
-            returnLoc = "Minneapolis";            
+            returnLoc = "Oakland";            
         }
 
         return returnLoc;
@@ -248,7 +261,7 @@ var determineMeetingLocation = function(eventDetails) {
 }  // end of determineMeetingLocation 
 
 
-Template.schedule.rendered = function() {
+Template.scheduleSF.rendered = function() {
 		eventDetails = Session.get("eventDetails");
     	console.log(eventDetails);
 		var loc = eventDetails.invitees[0].loc;
@@ -260,14 +273,14 @@ Template.schedule.rendered = function() {
 		for (i = 0; i < 20; i++) 
 			eventDetails.restaurantSelected[i] = false;
 
-		cuisine = determineCuisine(eventDetails);
+		cuisine = determineCuisineSF(eventDetails);
 
 		console.log(cuisine);
 
         // Ideally it should be a function
         // Identify ideal location for the event based on invitees and organizer location
 
-        loc = determineMeetingLocation(eventDetails);
+        loc = determineMeetingLocationSF(eventDetails);
 
     	var returnedResults;
     	
@@ -281,7 +294,7 @@ Template.schedule.rendered = function() {
 		
 }
 
-Template.schedule.helpers({
+Template.scheduleSF.helpers({
 
     'eventname' : function() {
     	eventDetails = Session.get("eventDetails");
@@ -306,7 +319,7 @@ Template.schedule.helpers({
     },
 
     'showPriceLevel' : function(priceLevel) {
-        return  ratingSymbol (priceLevel);
+        return ratingSymbol(priceLevel);
     }
    
 
@@ -314,7 +327,7 @@ Template.schedule.helpers({
 });
 
 
-Template.schedule.events({
+Template.scheduleSF.events({
  	'click #0 input' : function(e, data) {
 
     	//console.log(e.target.labels);
@@ -461,7 +474,7 @@ Template.schedule.events({
 
     },
 
-    'click #create-event' : function (e, data) {
+    'click #create-event-sf' : function (e, data) {
     	var selectorIndex = 0;
     	console.log("Create event button was clicked");
     	eventDetails.pickedRestaurants = [];

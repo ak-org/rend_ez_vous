@@ -48,7 +48,7 @@ Template.recvd.onRendered(function() {
         },
 
         restaurantAddress : function(index, eventDetails) {
-              return eventDetails.returnedResults[index].formatted_address;
+              return eventDetails.pickedRestaurants[index].formatted_address;
         },
 
         isResponseYes : function (myindex, eventDetails) {

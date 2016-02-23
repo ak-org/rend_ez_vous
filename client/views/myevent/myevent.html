@@ -9,17 +9,32 @@
 
 		</div>
 	<form action="">
-		<div class="form-group">
+
+        <div class="form-group">
             
-                <input type="text" class="form-control" id="eventName" placeholder="Name this Event such as Lunch with...">
+                <input type="text" class="form-control" id="eventName" placeholder="Name this Event such as Lunch with... ">
 
         </div>
 
-        <div class="form-group">
-
-
-            <div class="container-fluid">
+		<div class="form-group">
+		
+            	<label>Price Preference</label>
+                <select name="min_price" id="min_price">
+				  <option value="1">Inexpensive</option>
+				  <option value="2">Moderate</option>
+				</select>
+				<label>to</label>
+                <select name="max_price" id="max_price">				 
+				  <option value="2">Moderate</option>
+				  <option value="3">Expensive</option>
+				  <option value="4">High End</option>
+				</select>
 			
+        </div>
+
+
+
+        <div class="form-group">		
 
 			        <div class="col-sm-12">
 			            <div class="form-group">
@@ -31,7 +46,7 @@
 			            </div>
 			    
 			    </div>
-			</div>
+			
 		</div>
                  
 

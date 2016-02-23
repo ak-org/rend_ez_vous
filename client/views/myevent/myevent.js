@@ -136,6 +136,11 @@ Template.myevent.events({
          var eventFlag = true;
          var dateFlag = true;
          var inviteeFlag = true;
+
+         var min_price = data.find('#min_price').value;
+         var max_price = data.find('#max_price').value;
+
+         console.log("min_price is " + min_price + " max_price is " + max_price);
          eventname = data.find('#eventName').value;
          
 
@@ -177,9 +182,12 @@ Template.myevent.events({
             eventDetails.inviteeCount = invitees.find().count();
             eventDetails.invitees = invitees.find().fetch();
 
+
             console.log(eventDetails.invitees);
 
             Session.set('eventDetails', eventDetails);
+            Session.set('minPrice', min_price);
+            Session.set('maxPrice', max_price);
 
             if (orgLoc[0].state == "MN") {
                 Router.go('schedule');

@@ -1,6 +1,6 @@
 Meteor.methods({
 
-	'getRestaurantList' : function (city, cuisine, radius) {
+	'getRestaurantList' : function (city, cuisine, minPrice, maxPrice, radius) {
 
 		/* Sample URL 
 		https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=44.963323,-93.268284&radius=500&types=restaurant&key=AIzaSyA8nZvCfGgYVHvhOwz5Ja6vlbirOOZkF2M
@@ -67,7 +67,7 @@ Meteor.methods({
 		var radius = radius;
 		//var apiKey = Meteor.settings.googlePlacesApiKey;
 		var apiKey = "AIzaSyDjJDaW_HxsIsY7qJ0wOL1e0c8ShQ_QrKw";
-		var searchUrl = url +  cuisine + "&types=restaurant&"  + "&sensor=true&location=" + location + "&minprice=2&maxprice=4" + "&radius=" + radius + "&key=" + apiKey;
+		var searchUrl = url +  cuisine + "&types=restaurant&"  + "&sensor=true&location=" + location + "&minprice=" + minPrice + "&maxprice=" + maxPrice + "&radius=" + radius + "&key=" + apiKey;
 		var results = Meteor.http.call('GET', searchUrl);
         console.log(searchUrl);
 		return results;

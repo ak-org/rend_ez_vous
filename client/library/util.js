@@ -28,6 +28,7 @@ findVenue = function(eventDetails) {
           var highestIndex = 0;
           var venueDetails;
           var tiedVotes = false;
+          var rating;
 
 
           for (var index=0; index < eventDetails.pickedRestaurantsVote.length; index++) {
@@ -68,9 +69,16 @@ findVenue = function(eventDetails) {
           }
 
           //console.log("Highest index is ", highestIndex, eventDetails.pickedRestaurants);
+
+          if (!eventDetails.pickedRestaurants[highestIndex].rating ) {
+              rating = "Unavailable";
+          }
+          else {
+              rating = eventDetails.pickedRestaurants[highestIndex].rating + "/5";
+          }
           
           venueDetails = '<h3>' + eventDetails.pickedRestaurants[highestIndex].name  + '</h3><br>' + eventDetails.pickedRestaurants[highestIndex].formatted_address + 
-                         "<br> Rating is " + eventDetails.pickedRestaurants[highestIndex].rating + "/5" +
+                         "<br> Rating is " + rating +
                          "<br> " + ratingSymbol(eventDetails.pickedRestaurants[highestIndex].price_level);
           console.log("return venue " + venueDetails);
           return venueDetails;

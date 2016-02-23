@@ -271,7 +271,7 @@ Template.schedule.rendered = function() {
 
     	var returnedResults;
     	
-    	Meteor.call('getRestaurantList', loc, cuisine, 15000, function(err, results) {
+    	Meteor.call('getRestaurantList', loc, cuisine, Session.get('minPrice'), Session.get('maxPrice'), 5000, function(err, results) {
     		console.log("Server responded with ", results);
     		returnedResults = JSON.parse(results.content);
     		//console.log(returnedResults.results);

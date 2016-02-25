@@ -5,7 +5,8 @@ Meteor.subscribe('events');
 var determineCuisineSF = function (eventDetails) {
         
         var cuisineChoice = "";
-        var prefCuisineCount = [0 ,0 ,0, 0, 0];
+        var prefCuisineCount = [0 ,0 ,0, 0, 0, 
+                                0, 0, 0, 0, 0];
         var foundMatchForAll = false;
         var pref;
         
@@ -32,6 +33,25 @@ var determineCuisineSF = function (eventDetails) {
             if (pref[4].japanese) { 
                 prefCuisineCount[4]++;
             }
+            if (pref[5].indian) { 
+                prefCuisineCount[5]++;
+            }
+
+            if (pref[6].greek) { 
+                prefCuisineCount[6]++;
+            }
+
+            if (pref[7].mediterranean) { 
+                prefCuisineCount[7]++;
+            }
+
+            if (pref[8].thai) { 
+                prefCuisineCount[8]++;
+            }
+
+            if (pref[9].vietnamese) { 
+                prefCuisineCount[9]++;
+            }
 
         }
         
@@ -52,6 +72,21 @@ var determineCuisineSF = function (eventDetails) {
         if (eventDetails.organizerCuisinePef[4].japanese) { 
             prefCuisineCount[4]++;
         }
+        if (eventDetails.organizerCuisinePef[5].indian) { 
+            prefCuisineCount[5]++;
+        }
+        if (eventDetails.organizerCuisinePef[6].greek) { 
+            prefCuisineCount[6]++;
+        }
+        if (eventDetails.organizerCuisinePef[7].mediterranean) { 
+            prefCuisineCount[7]++;
+        }
+        if (eventDetails.organizerCuisinePef[8].thai) { 
+            prefCuisineCount[8]++;
+        }
+        if (eventDetails.organizerCuisinePef[9].vietnamese) { 
+            prefCuisineCount[9]++;
+        }        
 
         
         // if count is same as invitees + organizer, we have a good match
@@ -60,8 +95,12 @@ var determineCuisineSF = function (eventDetails) {
         if (prefCuisineCount[1] > eventDetails.inviteeCount) { foundMatchForAll = true; cuisineChoice += "American|"; }
         if (prefCuisineCount[2] > eventDetails.inviteeCount) { foundMatchForAll = true; cuisineChoice += "Italian|"; }
         if (prefCuisineCount[3] > eventDetails.inviteeCount) { foundMatchForAll = true; cuisineChoice += "Chinese|"; }
-        if (prefCuisineCount[4] > eventDetails.inviteeCount) { foundMatchForAll = true; cuisineChoice += "Japanese"; }
-
+        if (prefCuisineCount[4] > eventDetails.inviteeCount) { foundMatchForAll = true; cuisineChoice += "Japanese|"; }
+        if (prefCuisineCount[5] > eventDetails.inviteeCount) { foundMatchForAll = true; cuisineChoice += "Indian|"; }
+        if (prefCuisineCount[6] > eventDetails.inviteeCount) { foundMatchForAll = true; cuisineChoice += "Greek|"; }
+        if (prefCuisineCount[7] > eventDetails.inviteeCount) { foundMatchForAll = true; cuisineChoice += "Mediterranean|"; }
+        if (prefCuisineCount[8] > eventDetails.inviteeCount) { foundMatchForAll = true; cuisineChoice += "Thai|"; }
+        if (prefCuisineCount[9] > eventDetails.inviteeCount) { foundMatchForAll = true; cuisineChoice += "Vietnamese"; }                                
         if (foundMatchForAll == false) {
 
             // No hit was 1005, make it superset of everyone's preference
@@ -70,7 +109,12 @@ var determineCuisineSF = function (eventDetails) {
             if (prefCuisineCount[1] > 0) { cuisineChoice += "American|"; }
             if (prefCuisineCount[2] > 0) { cuisineChoice += "Italian|"; }
             if (prefCuisineCount[3] > 0) { cuisineChoice += "Chinese|"; }
-            if (prefCuisineCount[4] > 0) { cuisineChoice += "Japanese"; }
+            if (prefCuisineCount[4] > 0) { cuisineChoice += "Japanese|"; }
+            if (prefCuisineCount[5] > 0) { cuisineChoice += "Indian|"; }
+            if (prefCuisineCount[6] > 0) { cuisineChoice += "Greek|"; }
+            if (prefCuisineCount[7] > 0) { cuisineChoice += "Mediterranean|"; }
+            if (prefCuisineCount[8] > 0) { cuisineChoice += "Thai|"; }
+            if (prefCuisineCount[9] > 0) { cuisineChoice += "Vietnamese"; }   
 
         }
 

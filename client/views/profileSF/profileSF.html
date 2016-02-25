@@ -8,60 +8,111 @@
 {{/if}}
  <div class="container">
 
-	<h2>Hello {{currentUser.profile.realname}}, Let's update your profile</h2>
+	<h2>Hey {{fname currentUser.profile.realname}}, let's update your profile</h2>
     <input type="hidden" name="username" id="username" value={{currentUser.username}}>
 	<!-- Cuisine Prefernces -->
 
 	<h2>Cuisine Preferences</h2>
 
-    <div class="col-sm-12">
-	    <div class="checkbox">
-	            <label style="font-size: 1.5em">
-	                <input type="checkbox" name="cuisine" id="american"
+        <div class="col-sm-12">
+       <div class="col-sm-6">
+        <div class="checkbox">
+                <label style="font-size: 1.5em">
+                    <input type="checkbox" name="cuisine" id="american"
                     value="american" checked="{{isAmericanChecked}}">
-	                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-	                American
-	            </label>
-	    </div>
+                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                    American
+                </label>
+        </div>
 
-	   <div class="checkbox">
-	            <label style="font-size: 1.5em">
-	                <input type="checkbox" name="cuisine" id="italian" 
+       <div class="checkbox">
+                <label style="font-size: 1.5em">
+                    <input type="checkbox" name="cuisine" id="italian" 
                             value="italian" checked="{{isItalianChecked}}">
-	                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-	                Italian
-	            </label>
-	    </div>
+                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                    Italian
+                </label>
+        </div>
 
 
-	   <div class="checkbox">
-	            <label style="font-size: 1.5em">
-	                <input type="checkbox" name="cuisine" id = "chinese" 
+       <div class="checkbox">
+                <label style="font-size: 1.5em">
+                    <input type="checkbox" name="cuisine" id = "chinese" 
                     value="chinese" 
                     checked="{{isChineseChecked}}">
-	                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-	                Chinese
-	            </label>
-	    </div>
+                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                    Chinese
+                </label>
+        </div>
 
-	    <div class="checkbox">
-	            <label style="font-size: 1.5em">
-	                <input type="checkbox" name="cuisine" id="japanese" 
+        <div class="checkbox">
+                <label style="font-size: 1.5em">
+                    <input type="checkbox" name="cuisine" id="japanese" 
                     value="japanese" checked="{{isJapaneseChecked}}">
-	                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-	                Japanese
-	            </label>
-	    </div>
+                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                    Japanese
+                </label>
+        </div>
 
 
-	    <div class="checkbox">
-	            <label style="font-size: 1.5em">
-	                <input type="checkbox" name="cuisine" id="mexican" 
+        <div class="checkbox">
+                <label style="font-size: 1.5em">
+                    <input type="checkbox" name="cuisine" id="mexican" 
                     value="mexican" checked="{{isMexicanChecked}}">
-	                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-	                Mexican
-	            </label>
-	    </div>
+                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                    Mexican
+                </label>
+        </div>
+      </div>  
+       <div class="col-sm-6">
+        <div class="checkbox">
+                <label style="font-size: 1.5em">
+                    <input type="checkbox" name="cuisine" id="indian"
+                    value="indian" checked="{{isIndianChecked}}">
+                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                    Indian
+                </label>
+        </div>
+
+       <div class="checkbox">
+                <label style="font-size: 1.5em">
+                    <input type="checkbox" name="cuisine" id="greek" 
+                            value="greek" checked="{{isGreekChecked}}">
+                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                    Greek
+                </label>
+        </div>
+
+
+       <div class="checkbox">
+                <label style="font-size: 1.5em">
+                    <input type="checkbox" name="cuisine" id = "mediterranean" 
+                    value="mediterranean" 
+                    checked="{{isMediterraneanChecked}}">
+                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                    Mediterranean
+                </label>
+        </div>
+
+        <div class="checkbox">
+                <label style="font-size: 1.5em">
+                    <input type="checkbox" name="cuisine" id="thai" 
+                    value="thai" checked="{{isThaiChecked}}">
+                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                    Thai
+                </label>
+        </div>
+
+
+        <div class="checkbox">
+                <label style="font-size: 1.5em">
+                    <input type="checkbox" name="cuisine" id="vietnamese" 
+                    value="vietnamese" checked="{{isVietnameseChecked}}">
+                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                    Vietnamese
+                </label>
+        </div>
+      </div>      
     </div>
 	
 	<!-- Distance Prefernces -->

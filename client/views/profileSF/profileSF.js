@@ -70,6 +70,52 @@ Meteor.subscribe('profiles', function() {
                 }
             },
 
+            isIndianChecked : function () { 
+               if ((profileDetails[0]) && (profileDetails[0].cuisine[5].indian)) {
+                  console.log("Indian = ", profileDetails[0].cuisine[5])
+                  return true;
+                }
+                else {
+                  return false;
+                }
+            },
+            isGreekChecked : function () { 
+                if ((profileDetails[0]) && (profileDetails[0].cuisine[6].greek)) {
+                  console.log("Greek = ", profileDetails[0].cuisine[6])
+                  return true;
+                }
+                else {
+                  return false;
+                }
+            },
+            isMediterraneanChecked : function () { 
+                if ((profileDetails[0]) && (profileDetails[0].cuisine[7].mediterranean)) {
+                  console.log("Mediterranean = ", profileDetails[0].cuisine[7])
+                  return true;
+                }
+                else {
+                  return false;
+                }              
+            },
+            isThaiChecked : function () { 
+                if ((profileDetails[0]) && (profileDetails[0].cuisine[8].thai)) {
+                  console.log("Thai = ", profileDetails[0].cuisine[8])
+                  return true;
+                }
+                else {
+                  return false;
+                }              
+            }, 
+            isVietnameseChecked : function () { 
+                if ((profileDetails[0]) && (profileDetails[0].cuisine[9].vietnamese)) {
+                  console.log("Vietnamese = ", profileDetails[0].cuisine[9])
+                  return true;
+                }
+                else {
+                  return false;
+                }
+            },
+
             isBerkeleyChecked: function() {
                 if ((profileDetails[0]) && (profileDetails[0].city === "Berkeley")) {
                        return true;
@@ -169,7 +215,10 @@ Meteor.subscribe('profiles', function() {
                 else {
                   return false;
                 }
-            }
+            },
+            fname : function(fullName) {
+                return fullName.split(" ")[0];
+              }
 
 
     });
@@ -194,6 +243,11 @@ Meteor.subscribe('profiles', function() {
             var chineseSelected = data.find('#chinese').checked;
             var japaneseSelected = data.find('#japanese').checked;
             var mexicanSelected = data.find('#mexican').checked;
+            var indianSelected = data.find('#indian').checked;
+            var greekSelected = data.find('#greek').checked;
+            var mediterraneanSelected = data.find('#mediterranean').checked;
+            var thaiSelected = data.find('#thai').checked;
+            var vietnameseSelected = data.find('#vietnamese').checked;  
 
             // Distance selection
             var walkSelected = data.find('#walk').checked;
@@ -230,7 +284,12 @@ Meteor.subscribe('profiles', function() {
                  !(italianSelected) &&
                  !(chineseSelected) &&
                  !(japaneseSelected) && 
-                 !(mexicanSelected) )
+                 !(mexicanSelected) && 
+                 !(indianSelected) &&
+                 !(greekSelected) && 
+                 !(mediterraneanSelected) &&
+                 !(thaiSelected) &&
+                 !(vietnameseSelected) )
             {
                 console.log("Please select atleast one cuisine");
                 alert("Please select atleast one cuisine");
@@ -249,7 +308,12 @@ Meteor.subscribe('profiles', function() {
                                     { american : americanSelected } ,
                                    { italian : italianSelected } ,
                                     { chinese : chineseSelected } ,
-                                  { japanese : japaneseSelected}
+                                  { japanese : japaneseSelected}, 
+                                  { indian : indianSelected}, 
+                                  { greek : greekSelected} , 
+                                  { mediterranean : mediterraneanSelected}, 
+                                  { thai : thaiSelected }, 
+                                  { vietnamese : vietnameseSelected}
                                 ],
                                 city : city,
                                 metro: "sanfrancisco",
@@ -270,7 +334,12 @@ Meteor.subscribe('profiles', function() {
                         { american : americanSelected } ,
                           { italian : italianSelected } ,
                          { chinese : chineseSelected } ,
-                          { japanese : japaneseSelected}
+                          { japanese : japaneseSelected}, 
+                          { indian : indianSelected}, 
+                          { greek : greekSelected} , 
+                          { mediterranean : mediterraneanSelected}, 
+                          { thai : thaiSelected }, 
+                          { vietnamese : vietnameseSelected}
                         ],
                      city : city,
                      metro: "sanfrancisco",

@@ -34,6 +34,10 @@ Template.landing.helpers({
 		return recvdEvents;
 	}, 
 
+  fname : function(fullName) {
+    return fullName.split(" ")[0];
+  }
+
 
 });
 

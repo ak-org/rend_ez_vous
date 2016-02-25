@@ -5,7 +5,8 @@ Meteor.subscribe('events');
 var determineCuisine = function (eventDetails) {
         
         var cuisineChoice = "";
-        var prefCuisineCount = [0 ,0 ,0, 0, 0];
+        var prefCuisineCount = [0 ,0 ,0, 0, 0, 
+                                0, 0, 0, 0, 0];
         var foundMatchForAll = false;
         var pref;
         
@@ -33,6 +34,27 @@ var determineCuisine = function (eventDetails) {
                 prefCuisineCount[4]++;
             }
 
+            if (pref[5].indian) { 
+                prefCuisineCount[5]++;
+            }
+
+            if (pref[6].greek) { 
+                prefCuisineCount[6]++;
+            }
+
+            if (pref[7].mediterranean) { 
+                prefCuisineCount[7]++;
+            }
+
+            if (pref[8].thai) { 
+                prefCuisineCount[8]++;
+            }
+
+            if (pref[9].vietnamese) { 
+                prefCuisineCount[9]++;
+            }
+
+
         }
         
         // account for organizer preferences as well
@@ -52,6 +74,22 @@ var determineCuisine = function (eventDetails) {
         if (eventDetails.organizerCuisinePef[4].japanese) { 
             prefCuisineCount[4]++;
         }
+        if (eventDetails.organizerCuisinePef[5].indian) { 
+            prefCuisineCount[5]++;
+        }
+        if (eventDetails.organizerCuisinePef[6].greek) { 
+            prefCuisineCount[6]++;
+        }
+        if (eventDetails.organizerCuisinePef[7].mediterranean) { 
+            prefCuisineCount[7]++;
+        }
+        if (eventDetails.organizerCuisinePef[8].thai) { 
+            prefCuisineCount[8]++;
+        }
+        if (eventDetails.organizerCuisinePef[9].vietnamese) { 
+            prefCuisineCount[9]++;
+        }        
+
 
         
         // if count is same as invitees + organizer, we have a good match
@@ -61,7 +99,11 @@ var determineCuisine = function (eventDetails) {
         if (prefCuisineCount[2] > eventDetails.inviteeCount) { foundMatchForAll = true; cuisineChoice += "Italian|"; }
         if (prefCuisineCount[3] > eventDetails.inviteeCount) { foundMatchForAll = true; cuisineChoice += "Chinese|"; }
         if (prefCuisineCount[4] > eventDetails.inviteeCount) { foundMatchForAll = true; cuisineChoice += "Japanese"; }
-
+        if (prefCuisineCount[5] > eventDetails.inviteeCount) { foundMatchForAll = true; cuisineChoice += "Indian|"; }
+        if (prefCuisineCount[6] > eventDetails.inviteeCount) { foundMatchForAll = true; cuisineChoice += "Greek|"; }
+        if (prefCuisineCount[7] > eventDetails.inviteeCount) { foundMatchForAll = true; cuisineChoice += "Mediterranean|"; }
+        if (prefCuisineCount[8] > eventDetails.inviteeCount) { foundMatchForAll = true; cuisineChoice += "Thai|"; }
+        if (prefCuisineCount[9] > eventDetails.inviteeCount) { foundMatchForAll = true; cuisineChoice += "Vietnamese"; }  
         if (foundMatchForAll == false) {
 
             // No hit was 1005, make it superset of everyone's preference
@@ -71,6 +113,11 @@ var determineCuisine = function (eventDetails) {
             if (prefCuisineCount[2] > 0) { cuisineChoice += "Italian|"; }
             if (prefCuisineCount[3] > 0) { cuisineChoice += "Chinese|"; }
             if (prefCuisineCount[4] > 0) { cuisineChoice += "Japanese"; }
+            if (prefCuisineCount[5] > 0) { cuisineChoice += "Indian|"; }
+            if (prefCuisineCount[6] > 0) { cuisineChoice += "Greek|"; }
+            if (prefCuisineCount[7] > 0) { cuisineChoice += "Mediterranean|"; }
+            if (prefCuisineCount[8] > 0) { cuisineChoice += "Thai|"; }
+            if (prefCuisineCount[9] > 0) { cuisineChoice += "Vietnamese"; }             
 
         }
 
@@ -252,6 +299,9 @@ Template.schedule.rendered = function() {
 		eventDetails = Session.get("eventDetails");
     	console.log(eventDetails);
 		var loc = eventDetails.invitees[0].loc;
+        var returnedResults;
+        var minPrice = Session.get('minPrice');
+        var maxPrice = Session.get('maxPrice');
 		
 		var cuisine = "";
 
@@ -269,9 +319,16 @@ Template.schedule.rendered = function() {
 
         loc = determineMeetingLocation(eventDetails);
 
-    	var returnedResults;
+
+        // if minPrice is more than maxPrice, swap them
+        if (minPrice > maxPrice) {
+            var tmp = maxPrice;
+            maxPrice = minPrice;
+            minPrice = tmp;
+
+        }
     	
-    	Meteor.call('getRestaurantList', loc, cuisine, Session.get('minPrice'), Session.get('maxPrice'), 5000, function(err, results) {
+    	Meteor.call('getRestaurantList', loc, cuisine, minPrice, maxPrice, 5000, function(err, results) {
     		console.log("Server responded with ", results);
     		returnedResults = JSON.parse(results.content);
     		//console.log(returnedResults.results);

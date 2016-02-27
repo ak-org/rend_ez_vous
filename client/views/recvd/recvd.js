@@ -23,7 +23,7 @@ Template.recvd.onRendered(function() {
 	  // This code only runs on the client
   Template.recvd.helpers({
         invitees: function() {
-          recvdEvents = Events.find({"eventDetails.invitees.name" : Meteor.user().username}, {sort: {_id: 1}});
+          recvdEvents = Events.find({"eventDetails.invitees.name" : Meteor.user().username}, {sort: {createdAt: -1}});
             //console.log(userEvents.collection);
             //console.log(recvdEvents);
             return  recvdEvents;

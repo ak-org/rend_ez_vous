@@ -39,15 +39,15 @@
 
         <div class="form-group">		
 
-			        <div class="col-sm-12">
-			            <div class="form-group">
-			              <div class="input-group datetimepicker">
-						    
-						    <input class="set-due-date form-control" type="text" placeholder="Click on icon on the right to pick date and time."/>
-						    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-						  </div>
-			            </div>
-			    
+			    <div class="col-sm-12">
+		            <div class="form-group">
+		              <div class="input-group datetimepicker">
+					    
+					    <input class="set-due-date form-control" type="text" value={{currentDate}} placeholder="Click on icon on the right to pick date and time."/>
+					    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+					  </div>
+					   
+		            </div>
 			    </div>
 			
 		</div>
@@ -55,14 +55,39 @@
 
         <div class="form-group">
             
-			<div class="input-group">
-			        <input type="text" id="friendname" placeholder="enter userid of your contact" class="form-control">
+			<div class="col-sm-12 input-group">
+			        <input type="text" id="friendname" placeholder="Start typing name here" class="form-control">
+			        <!--
 			        <span class="input-group-btn">
 			          <button class="btn btn-primary" id="addfriend" type="button">Add Friend</button>
 			        </span>
-     		</div>
+			        -->
 
-        </div>
+     		</div>
+     		<div>
+     		  <table id="searchResultsTable" class="table table-hover">
+     		  	<thead>
+     		  	</thead>
+     		  	<tbody>
+		     		  	{{#each partialSearchResults}}
+		     		  		
+		     		  		<tr>
+		     		  			<th scope="row"></th>
+		     		  			<td>{{realname}} </td>
+		     		  			<td id="searchUsername">{{username}}</td>
+		     		  			<td>{{city}}</td>
+		     		  			<td>	
+							          <button class="btn btn-primary  {{username}}" id="addOneFriend" type="button" value={{username}}>Add</button>
+							    </td>
+						    </tr>  		 
+						 
+						        
+						{{/each}}
+				</tbody>
+			  </table>  
+     		</div>
+     		
+        </div>	
 
         <div class="">
 
@@ -70,10 +95,9 @@
     			<p>
 				    <ul class="list-group">
 				    	 <li class="list-group-item">
-				    	 
-				    	
-				      		<h4 class = "list-group-item-heading">{{realname}}
-				     		 </h4>
+				    	 				    	
+				      		<h4 class = "list-group-item-heading">{{realname}} </h4>
+
 				         </li>
 				    </ul>  
     			</p>

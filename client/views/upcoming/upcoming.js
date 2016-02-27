@@ -20,7 +20,7 @@ Template.upcoming.helpers({
     eventList : function() {
         
         userEvents = Events.find({ $or : [{"eventDetails.organizer" : Meteor.user().username}, 
-                                     {"eventDetails.invitees.name" : Meteor.user().username}]}, {sort: {_id: 1}});
+                                     {"eventDetails.invitees.name" : Meteor.user().username}]}, {sort: {_id: -1}});
             console.log(userEvents.collection);
             return  userEvents;
         },

@@ -28,13 +28,18 @@ var orgLoc;
 
 // local object to make the invitee list dynamic 
 var invitees = new Mongo.Collection(null);
+var searchResults = new Mongo.Collection(null);
 
 
 
 Template.myevent.onRendered(function() {
     this.$('.datetimepicker').datetimepicker({
+         useCurrent : true,
          viewMode: 'years'
     });
+    Session.set('partialSearch', []);
+    invitees.remove({});
+    searchResults.remove({});
 });
 
 
@@ -71,6 +76,29 @@ Template.myevent.helpers({
     },
     friendlist : function() {
       return invitees.find({});
+    },
+    currentDate: function() {
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1; //January is 0!
+      var yyyy = today.getFullYear();
+
+      if(dd<10) {
+          dd='0'+dd
+      } 
+
+      if(mm<10) {
+          mm='0'+mm
+      } 
+      time = today.getHours() + ":" + today.getMinutes();
+
+      today = mm+'/'+dd+'/'+yyyy+time;
+      return (today);
+    },
+    partialSearchResults : function() {
+
+      console.log("partialSearchResults", Session.get('partialSearch'));
+      return Session.get('partialSearch');
     }
 
 });
@@ -80,6 +108,42 @@ Template.myevent.helpers({
 Template.myevent.events({
 
 
+    "keyup input#friendname" : function(event, data) {
+        
+
+        
+        var partialSearchResults = [];
+        var searchUser = data.find('#friendname').value;
+        username = data.find('#username').value;
+        console.log("search field length ", searchUser.length);
+        if (searchUser.length == 0 ) {
+
+        }
+        else {
+          partialSearch1 = Profiles.find({realname: {$regex : new RegExp(searchUser, "i")}}).fetch();
+          for (var i=0; i < partialSearch1.length; i++) {
+              res1 = Friends.find({username : username, contactname : partialSearch1[i].username}).fetch();
+              res2 = Family.find({username : username, contactname : partialSearch1[i].username}).fetch();
+              res3 = CoWorkers.find({username : username, contactname : partialSearch1[i].username}).fetch();
+
+              if ( (res1.length > 0) || (res2.length > 0) || (res3.length > 0) ) {
+                partialSearchResults.push(partialSearch1[i]);
+              }
+
+          }
+          
+        }
+        
+        
+        console.log("keyup : ", partialSearchResults);
+        Session.set('partialSearch', partialSearchResults);
+        return partialSearchResults;
+
+        
+
+    },
+
+    /*
     "click #addfriend" : function (event, data) {
         eventname = data.find('#eventName').value;
         contactname = data.find('#friendname').value;
@@ -126,7 +190,48 @@ Template.myevent.events({
     	}
     	
          data.find('#friendname').value = "";
+         data.find('')
     	//  var username  = data.find('#username').value;	
+    },
+
+    */
+
+    "click #addOneFriend" : function( event, data) {
+          //console.log("You clicked on one friend");
+          //console.log(data);
+          console.log(event.currentTarget.value);
+          var addUser = event.currentTarget.value;
+          var myres = invitees.find({name : addUser}).fetch();
+          username = data.find('#username').value;
+
+          var userVotes = new Array(20);
+          console.log("User Votes ",  userVotes);
+
+          for (var i=0; i < userVotes.length; i++) {
+            userVotes[i] = false;
+          }
+          
+            if ((myres.length) && (myres.length > 0))  {
+                console.log( contactname + " is already in the invitee list!");
+            }
+            else {
+                realname = Profiles.find({username: addUser}).fetch();
+                orgLoc = Profiles.find({username: username}).fetch();
+                Session.set('organizerLoc', orgLoc[0].city);
+                Session.set('organizerCuisinePref', orgLoc[0].cuisine);
+                console.log(realname[0].realname);
+                console.log("User Votes ",  userVotes);
+                invitees.insert({name : addUser, realname : realname[0].realname, loc : realname[0].city, cuisine: realname[0].cuisine, votes : userVotes, response : 'NoResponse'});
+                console.log("Added " + addUser + " to the invitee list!");
+                console.log("Invitees for  your event " , invitees.find().count());
+            }
+
+          /* data.find('#friendname').value = event.currentTarget.value; */
+          data.find('#friendname').value = "";
+          Session.set('partialSearch', []);
+
+
+
     },
 
 
@@ -196,7 +301,7 @@ Template.myevent.events({
                 Router.go('scheduleSF');
             }
             else {
-                console.log("Comong soon!!");
+                console.log("Coming soon!!");
             }
 
             

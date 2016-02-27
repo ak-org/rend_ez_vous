@@ -58,7 +58,7 @@ var determineCuisine = function (eventDetails) {
         }
         
         // account for organizer preferences as well
-
+        console.log(eventDetails.organizerCuisinePef);
         if (eventDetails.organizerCuisinePef[0].mexican) { 
             prefCuisineCount[0]++;
         }

@@ -2,7 +2,11 @@
 var userEvents;
 
 Meteor.subscribe('events', function() {
+  if (Meteor.user()) {
+
+
   console.log("Number of Sent Events = "  + Events.find({"eventDetails.organizer" : Meteor.user().username}).count() );
+  }
 });
 
 Meteor.subscribe('profiles', function() {

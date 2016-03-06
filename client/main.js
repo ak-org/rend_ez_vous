@@ -17,8 +17,26 @@ Router.route('/login', {
 
 });
 
-Router.route('/register', {
-    template: 'register'
+Router.route('/register/:token', {
+    template: 'register',
+    data : function() {
+        //console.log(this.params.token);
+        return { token: this.params.token };
+    }
+
+
+});
+
+Router.route('/requestInvite', {
+    template: 'requestInvite'
+
+
+});
+
+Router.route('/share', function() {
+    this.render('shareRendezvous');
+    this.layout('landing');
+
 
 });
 

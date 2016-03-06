@@ -3,7 +3,9 @@ var indexer = 0;
 
 
 Meteor.subscribe('events', function() {
-  console.log("Number of Recvd Events = "  + Events.find({"eventDetails.invitees.name" : Meteor.user().username}).count() );
+  if (Meteor.user()) {
+    console.log("Number of Recvd Events = "  + Events.find({"eventDetails.invitees.name" : Meteor.user().username}).count() );
+  }
 });
 
 Meteor.subscribe('profiles', function() {

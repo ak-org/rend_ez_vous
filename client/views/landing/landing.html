@@ -1,7 +1,7 @@
 <template name="landing">
-{{> navbar}}
-{{#if  currentUser}}
 
+{{#if  currentUser}}
+{{> navbar}}
 <div class="container">
     <h2>Hi, {{fname currentUser.profile.realname}}!</h2>
     <div class="row-fluid">
@@ -15,6 +15,8 @@
 		    	<li class="list-group-item"><span class="badge">11</span><a href="/messages">Messages </a></li>
 		    	<li class="list-group-item" id="user-profile"><a href="/profile">Profile</a></li>
           <li class="list-group-item" id="user-contacts"><a href="/contacts">Contacts</a></li>
+           <li class="list-group-item" id="share-rendezvous"><a href="/share">Share Rendezvous</a></li>
+
 		    </ul>
       </div>
       <div class="col-sm-8">
@@ -24,11 +26,11 @@
       </div>
      </div>
  </div> 
- 
+{{> footer}} 
 {{else}}  
     {{> login}}
 {{/if}}
 
-{{> footer}}
+
 </template>	
    

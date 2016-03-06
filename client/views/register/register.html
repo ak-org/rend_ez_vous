@@ -1,9 +1,12 @@
 <template name="register">
 
+{{#if  isTokenValid token}}
+
 
 {{#if  currentUser}}
+{{ >navbar}}
+<h4>Please <a href="/landing">click here </a>to goto landing page</h4>
 
-    <h1>Welcome aboard {{currentUser.profile.realname}} </h1>
  
 {{else}}   
 {{> navbar}} 
@@ -13,6 +16,7 @@
   		<h2>Dining Experience. Elevated.</h2>
   		<h2></h2>
   		<a href="http://rend-ez-vous.appspot.com"><button type="button" class="btn btn-primary"> Learn More </button></a>
+
 	</div>
 </div>		
 <div class="container">
@@ -27,19 +31,20 @@
 						<div class="row">
 							<div class="col-lg-12">
 								<form id="register-form" style="display: block;">
+									<input type="hidden" name="regToken" id="regToken" value={{token}}>
 									<div class="form-group">
 										
 										<input type="text" name="realname" id="realname" tabindex="1" class="form-control"  
 												minlength="6"
-												placeholder="First and Last Name" value="">
+												placeholder="First and Last Name" value="{{inviteName token}}">
 									</div>
 									<div class="form-group">
 										
-										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Pick a Username" value="">
 									</div>
 									<div class="form-group">
 										
-										<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+										<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="{{inviteEmail token}}">
 									</div>
 									<div class="form-group">
 										
@@ -91,5 +96,15 @@
 {{> footer}}
 
 {{/if}}	
+
+{{else}}
+	{{> navbar}} 
+	<div class="container">
+    	<h4>Invalid URL or you have already registered!</h4>
+    	<a href="/login">Return to login page</a>
+    </div>
+
+
+{{/if}}
 
 </template>

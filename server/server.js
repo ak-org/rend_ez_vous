@@ -91,5 +91,24 @@ Meteor.methods({
 		});
 		console.log("returning from sendinvites");
 
-     }
+     },
+
+     'isEmailRegistered' : function(email) {
+     	return Accounts.findUserByEmail(email);
+     },
+
+     'changeInviteRequestStatus': function(token) {
+     		InviteRequests.update({token: token}, 
+	                            {$set: {status: "ACCEPTED"}}, function(err) {
+	                            	 console.log("updating ", token);
+	                                 if (err) {
+	                                  console.log("Updated InviteRequest with", err);
+	                                 }
+	                            });
+
+     } 
+
+
+
+
 })

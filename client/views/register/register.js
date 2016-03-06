@@ -1,4 +1,10 @@
 
+Meteor.subscribe('inviteRequests', function() {
+
+
+});
+
+
 Template.register.onRendered( function() {
   $("#register-form").validate({
 
@@ -44,6 +50,7 @@ Template.register.onRendered( function() {
     }
     */
   });
+
 });
 
 
@@ -59,6 +66,9 @@ Template.register.onRendered( function() {
               if (twincitiesSelected == true) { loc = "twincities"; }
               if (sanfranciscoSelected == true) { loc = "sanfrancisco"; }
 
+
+
+              // Create user account
               Accounts.createUser({
               	username: data.find('#username').value,
               	password: data.find('#password').value,
@@ -77,6 +87,10 @@ Template.register.onRendered( function() {
               	   	   
                        console.log('Registgration Successful', loc);
 
+                       // Update InviteRequests document to reflect successful registration
+
+                       Meteor.call('changeInviteRequestStatus', data.find('#regToken').value);
+
                        if (loc == "twincities") {
                           Router.go('profile');
                        } 
@@ -90,6 +104,49 @@ Template.register.onRendered( function() {
           }    
       });
       
+      Template.register.helpers({
+          'inviteEmail' : function(token) {
+                var results = InviteRequests.find({token: token}).fetch();
+                //console.log("token is", token, results);
+                if (results.length > 0) {
+                    return results[0].email;
+                }
+                else {
+                  return "";
+                }
+                
+          },
 
+          'inviteName' : function(token) {
+                var results = InviteRequests.find({token: token}).fetch();
+                //console.log("token is", token, results);
+                if (results.length >0) {
+                     return results[0].name;
+                }
+                else {
+                  return "";
+                }
+               
+          },
+
+          'isTokenValid' : function(token) {
+                var results = InviteRequests.find({token: token}).fetch();
+
+                if (results.length > 0) {
+                  if (results[0].status == "PENDING") {
+                    return true;
+                  }
+                  else {
+                    // registration is already accepted
+                    return false;
+                  }
+                }
+                else {
+
+                  return false;
+                }
+          }
+
+      });
 
  

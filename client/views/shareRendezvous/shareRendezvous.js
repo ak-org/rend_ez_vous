@@ -148,7 +148,7 @@ Template.shareRendezvous.events({
 
               // send an email to requestor
 
-              alert("Request received. Please check your email in few minutes."); 
+              alert("Invite Sent. Your friend will receive invite via email in few minutes."); 
 
               //Router.go('/login');   
           }

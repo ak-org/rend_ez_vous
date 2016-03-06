@@ -16,8 +16,13 @@ Meteor.subscribe('coworkers', function() {
   console.log("count of coworkers = "  + CoWorkers.find({}).count() );
 });
 
+Template.contacts.onRendered(function(){
+      Session.set('partialSearch', '');
+});
 
 Template.contacts.helpers({
+
+
     friends: function() {
       return Friends.find({username : Meteor.user().username});
     },
@@ -29,13 +34,63 @@ Template.contacts.helpers({
 
     coworkers : function() {
       return CoWorkers.find({username : Meteor.user().username});
+    },
+
+    showRealname : function(username) {
+      var result = Profiles.find({username: username}).fetch();
+      return result[0].realname;
+    },
+
+    partialSearchResults : function() {
+
+      console.log("partialSearchResults", Session.get('partialSearch'));
+      return Session.get('partialSearch');
     }
+
     
 
 });
 
 
 Template.contacts.events({
+   "keyup input#contactname" : function(event, data) {
+        
+
+        
+        var partialSearchResults = [];
+        var searchUser = data.find('#contactname').value;
+        username = data.find('#username').value;
+        console.log("search field length ", searchUser.length);
+        if (searchUser.length == 0 ) {
+
+        }
+        else {
+          partialSearch1 = Profiles.find({realname: {$regex : new RegExp(searchUser, "i")}}).fetch();
+          for (var i=0; i < partialSearch1.length; i++) {
+              res1 = Friends.find({username : username, contactname : partialSearch1[i].username}).fetch();
+              res2 = Family.find({username : username, contactname : partialSearch1[i].username}).fetch();
+              res3 = CoWorkers.find({username : username, contactname : partialSearch1[i].username}).fetch();
+
+              if ( (res1.length == 0) && (res2.length == 0) && (res3.length == 0) ) {
+                partialSearchResults.push(partialSearch1[i]);
+              }
+
+          }
+          
+        }
+        
+        
+        console.log("keyup : ", partialSearchResults);
+        Session.set('partialSearch', partialSearchResults);
+        return partialSearchResults;       
+
+    },
+  "click #addOneFriend" : function( event, data) {
+    console.log(event.currentTarget.value);
+    data.find('#contactname').value = event.currentTarget.value;
+    Session.set('partialSearch', '');
+  },
+
   'click #addcontact' : function(e, data) {
 
       e.preventDefault();

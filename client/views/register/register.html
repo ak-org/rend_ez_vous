@@ -4,8 +4,6 @@
 
 
 {{#if  currentUser}}
-{{ >navbar}}
-<h4>Please <a href="/landing">click here </a>to goto landing page</h4>
 
  
 {{else}}   
@@ -96,13 +94,6 @@
 {{> footer}}
 
 {{/if}}	
-
-{{else}}
-	{{> navbar}} 
-	<div class="container">
-    	<h4>Invalid URL or you have already registered!</h4>
-    	<a href="/login">Return to login page</a>
-    </div>
 
 
 {{/if}}

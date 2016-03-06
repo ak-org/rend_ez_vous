@@ -106,7 +106,93 @@ Meteor.methods({
 	                                 }
 	                            });
 
-     } 
+     },
+
+     'autoUpdateContactsAtRegister' : function (username, token) {
+
+     		console.log("Params",  username, token);
+     		
+     		var result = InviteRequests.find({token: token}).fetch();
+     		
+     		console.log("result of token search is",  result[0]);
+     		var category = result[0].category;
+     		
+     		if (category == "Friend") {
+     			Friends.insert({
+                  username : username,
+                  contactname : result[0].referredBy
+             	 }, function(err, id) {
+                  if (id) { 
+                    console.log("Result of friends add is ", id); 
+                  }
+                  if (err)  { 
+                    console.log("Result of friends add is ", err); 
+                }
+                });
+     			Friends.insert({
+                  username : result[0].referredBy,
+                  contactname : username
+             	 }, function(err, id) {
+                  if (id) { 
+                    console.log("Result of friends add is ", id); 
+                  }
+                  if (err)  { 
+                    console.log("Result of friends add is ", err); 
+                }
+                });
+     		}
+     		if (category == "Family") {
+     			Family.insert({
+                  username : username,
+                  contactname : result[0].referredBy
+             	 }, function(err, id) {
+                  if (id) { 
+                    console.log("Result of family add is ", id); 
+                  }
+                  if (err)  { 
+                    console.log("Result of family add is ", err); 
+                }
+                });
+
+     			Family.insert({
+                  username : result[0].referredBy,
+                  contactname : username
+             	 }, function(err, id) {
+                  if (id) { 
+                    console.log("Result of add family is ", id); 
+                  }
+                  if (err)  { 
+                    console.log("Result of add family is ", err); 
+                }
+                });
+     		}
+     		if (category == "Co Worker") {
+     			CoWorkers.insert({
+                  username : username,
+                  contactname : result[0].referredBy
+             	 }, function(err, id) {
+                  if (id) { 
+                    console.log("Result of coworkers add is ", id); 
+                  }
+                  if (err)  { 
+                    console.log("Result of coworkers add is ", err); 
+                }
+                });
+
+     			CoWorkers.insert({
+                  username : result[0].referredBy,
+                  contactname : username
+             	 }, function(err, id) {
+                  if (id) { 
+                    console.log("Result of coworkers add is ", id); 
+                  }
+                  if (err)  { 
+                    console.log("Result of coworkers add is ", err); 
+                }
+                });
+     		}
+     		
+     }
 
 
 

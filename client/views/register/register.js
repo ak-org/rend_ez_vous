@@ -62,6 +62,8 @@ Template.register.onRendered( function() {
 
               var twincitiesSelected = data.find('#twincities').checked;
               var sanfranciscoSelected = data.find('#sanfrancisco').checked;
+              var registeredUsername = data.find('#username').value;
+              var token = data.find('#regToken').value;
 
               if (twincitiesSelected == true) { loc = "twincities"; }
               if (sanfranciscoSelected == true) { loc = "sanfrancisco"; }
@@ -89,8 +91,11 @@ Template.register.onRendered( function() {
 
                        // Update InviteRequests document to reflect successful registration
 
+                       
                        Meteor.call('changeInviteRequestStatus', data.find('#regToken').value);
-
+                      
+                       Meteor.call('autoUpdateContactsAtRegister', registeredUsername, token);
+                       
                        if (loc == "twincities") {
                           Router.go('profile');
                        } 

@@ -5,10 +5,35 @@
       
 
         <div class="input-group col-md-12 col-lg-12 col-xs-12">
-              <input type="text" id="contactname" class="form-control">
-              <span class="input-group-btn">
-                <button class="btn btn-primary" id="addcontact" type="button">+</button>
-              </span>
+              <div class="input-group row">
+                  <input type="text" id="contactname" class="form-control" placeholder="Start typing name">
+                  <span class="input-group-btn">
+                    <button class="btn btn-primary" id="addcontact" type="button">+</button>
+                  </span>
+              </div>
+                <div>
+                    <table id="searchResultsTable" class="table table-hover">
+                      <thead>
+                      </thead>
+                      <tbody>
+                          {{#each partialSearchResults}}
+                            
+                            <tr>
+                              <th scope="row"></th>
+                              <td>{{realname}} </td>
+                              <td id="searchUsername">{{username}}</td>
+                              <td>{{city}}</td>
+                              <td>  
+                                  <button class="btn btn-primary  {{username}}" id="addOneFriend" type="button" value={{username}}>Select</button>
+                            </td>
+                          </tr>      
+                       
+                              
+                      {{/each}}
+                  </tbody>
+                  </table>  
+                </div>
+
         </div>
     </div>
 
@@ -49,7 +74,8 @@
      	 </h4></a>
   			{{#each friends}}
    			 <li class="list-group-item">
-              <a href="">{{contactname}}</a>
+              <a href="">{{showRealname contactname}}</a><br>
+             
          </li>
   			{{/each}}
         </ul>
@@ -63,7 +89,8 @@
        </h4></a>
         {{#each family}}
          <li class="list-group-item">
-              <a href="">{{contactname}}</a>
+              <a href="">{{showRealname contactname}}</a><br>
+              
          </li>
         {{/each}}
         </ul>
@@ -77,7 +104,8 @@
        </h4></a>
         {{#each coworkers}}
          <li class="list-group-item">
-              <a href="">{{contactname}}</a>
+              <a href="">{{showRealname contactname}}</a><br>
+             
          </li>
         {{/each}}
         </ul>

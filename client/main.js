@@ -17,6 +17,11 @@ Router.route('/login', {
 
 });
 
+Router.route('/passwdRecovery', {
+    template: 'passwdRecovery'
+
+});
+
 Router.route('/register/:token', {
     template: 'register',
     data : function() {
@@ -95,6 +100,12 @@ Router.route('myevent', function() {
 
 Router.route('schedule', function() {
      this.render('schedule');
+     this.layout('landing');
+
+});
+
+Router.route('scheduleMN', function() {
+     this.render('scheduleMN');
      this.layout('landing');
 
 });

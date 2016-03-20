@@ -95,11 +95,35 @@ Template.myevent.helpers({
       today = mm+'/'+dd+'/'+yyyy+time;
       return (today);
     },
+
+
     partialSearchResults : function() {
 
       console.log("partialSearchResults", Session.get('partialSearch'));
       return Session.get('partialSearch');
-    }
+    },
+
+    locationSearchResults : function() {
+
+        
+        var returnData = Session.get('locationSearchResults');
+        
+        
+        if (returnData.status == "OK") {
+           //console.log(returnData.predictions);
+           return returnData.predictions;
+           
+        }
+
+        
+       
+
+      }
+     
+    
+
+
+      
 
 });
 
@@ -142,6 +166,31 @@ Template.myevent.events({
         
 
     },
+
+
+    "keyup input#eventLocation" : function(event, data) {
+
+          var search = data.find('#eventLocation').value;
+
+          if (search.length < 2) {
+              Session.set('locationSearchResults', '');
+          }
+          if (search.length > 1) {
+            Meteor.call('validateLocationForEvent', search, function(err, results) {
+              console.log("Server responded with ", JSON.parse(results.content));
+              Session.set('locationSearchResults', JSON.parse(results.content));
+          });
+
+          }
+          
+          
+    },
+
+    "click #selectLocation" : function( event, data) {
+    console.log(event.currentTarget.value);
+    data.find('#eventLocation').value = event.currentTarget.value;
+    Session.set('locationSearchResults', '');
+  },
 
     /*
     "click #addfriend" : function (event, data) {
@@ -286,23 +335,43 @@ Template.myevent.events({
             eventDetails.organizerCuisinePef = Session.get('organizerCuisinePref');
             eventDetails.inviteeCount = invitees.find().count();
             eventDetails.invitees = invitees.find().fetch();
-
-
-            console.log(eventDetails.invitees);
+            
+            eventDetails.selectedLocation = data.find('#eventLocation').value;
+            if (eventDetails.selectedLocation != '') {
+                eventDetails.overrideLocation = true;
+            } else {
+                eventDetails.overrideLocation = false;
+            }
+            
+            console.log(eventDetails);
 
             Session.set('eventDetails', eventDetails);
             Session.set('minPrice', min_price);
             Session.set('maxPrice', max_price);
 
-            if (orgLoc[0].state == "MN") {
+            if (eventDetails.overrideLocation == true) {
+              Meteor.call('geocodeLocation', eventDetails.selectedLocation, function(err, results) {
+                //console.log("Server responded with ", results);
+                returnedResults = JSON.parse(results.content);
+                console.log(returnedResults.results[0].geometry.location);
+                Session.set('getLocationCoords', returnedResults.results[0].geometry.location);
                 Router.go('schedule');
-            }
-            else  if (orgLoc[0].state == "CA") {
-                Router.go('scheduleSF');
+              });
+              
             }
             else {
-                console.log("Coming soon!!");
+              if (orgLoc[0].state == "MN") {
+                  Router.go('scheduleMN');
+              }
+              else  if (orgLoc[0].state == "CA") {
+                  Router.go('scheduleSF');
+              }
+              else {
+                  console.log("Coming soon!!");
+              }
             }
+
+            
 
             
 

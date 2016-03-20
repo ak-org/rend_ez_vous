@@ -1,5 +1,17 @@
 Meteor.methods({
 
+  'getRestaurantList2' : function (location, cuisine, minPrice, maxPrice, radius) {
+      var url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=";
+      var cuisine = cuisine;
+      var radius = radius;
+      //var apiKey = Meteor.settings.googlePlacesApiKey;
+      var apiKey = "AIzaSyDjJDaW_HxsIsY7qJ0wOL1e0c8ShQ_QrKw";
+      var searchUrl = url +  cuisine + "&types=restaurant&"  + "&sensor=true&location=" + location + "&minprice=" + minPrice + "&maxprice=" + maxPrice + "&radius=" + radius + "&key=" + apiKey;
+      var results = Meteor.http.call('GET', searchUrl);
+          console.log(searchUrl);
+      return results;
+  },
+
 	'getRestaurantList' : function (city, cuisine, minPrice, maxPrice, radius) {
 
 		/* Sample URL 
@@ -105,6 +117,28 @@ Meteor.methods({
 	                                  console.log("Updated InviteRequest with", err);
 	                                 }
 	                            });
+
+     },
+
+
+     'validateLocationForEvent' : function(searchLocation) {
+
+            if (searchLocation.length > 0) { 
+                var searchUrl = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + searchLocation + "&types=(cities)&language=en_US&key=AIzaSyBEzAj0hpb79pYqwucfiAmSQVDcQqAqByE";
+                var results = Meteor.http.call('GET', searchUrl);
+                console.log(results);
+                return results;
+            }
+
+
+
+     },
+
+     'geocodeLocation' : function(loc) {
+        var searchUrl =  "https://maps.googleapis.com/maps/api/geocode/json?address=" + loc + "&key=AIzaSyBEzAj0hpb79pYqwucfiAmSQVDcQqAqByE";
+        var results = Meteor.http.call('GET', searchUrl);
+                console.log("Geocode", results);
+                return results;
 
      },
 

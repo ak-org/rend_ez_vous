@@ -8,10 +8,11 @@
             if ((username != "") && (password != "")) {
                 Meteor.loginWithPassword(username, password, function(error){
                 if(error){
-                       console.log("Invalid Username or password" + error.reason);
+                       alert("Invalid Username or  " + error.reason);
+
                        Router.go('/');
                 } else {
-                     console.log("Successful login");
+                       console.log("Successful login");
                        Router.go('upcoming');
                 } 
               });
@@ -29,7 +30,7 @@
       
 
         $(' #login-form' ).validate();
-        console.log("The 'login' template was just rendered.");
+        //console.log("The 'login' template was just rendered.");
   });
 
 

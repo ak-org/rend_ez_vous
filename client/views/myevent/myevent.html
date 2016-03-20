@@ -52,6 +52,39 @@
 			
 		</div>
                  
+		<div class="form-group">
+			<div class="col-sm-12">
+				<div class="list-group">
+  						 <input type="text" class="form-control" id="eventLocation" placeholder="Override Location..(Optional)">
+
+				</div>
+				
+			</div>
+			
+		</div>
+
+		<div>
+     		  <table id="searchLocationsTable" class="table table-hover">
+     		  	<thead>
+     		  	</thead>
+     		  	<tbody> 
+		     		  	{{#each locationSearchResults}}
+		     		  		
+		     		  		<tr>
+		     		  			<th scope="row"></th>
+		     		  			<td>{{description}} </td>
+		     		  			<td>  
+                                	<button class="btn btn-primary  {{description}}" id="selectLocation" type="button" 
+                                			value={{description}}>Select</button>
+                            	</td>
+						    </tr>  		 
+						 
+						        
+						{{/each}}
+				</tbody>
+			  </table>  
+     		
+        </div>	
 
         <div class="form-group">
             

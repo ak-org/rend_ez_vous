@@ -22,6 +22,16 @@ Router.route('/passwdRecovery', {
 
 });
 
+Router.route('/passwdRecovery/:resetToken', {
+    template: 'passwdRecovery',
+    data : function() {
+        //console.log(this.params.resetToken);
+        return { resetToken: this.params.resetToken };
+    }
+
+
+});
+
 Router.route('/register/:token', {
     template: 'register',
     data : function() {
@@ -31,6 +41,9 @@ Router.route('/register/:token', {
 
 
 });
+
+
+
 
 Router.route('/requestInvite', {
     template: 'requestInvite'

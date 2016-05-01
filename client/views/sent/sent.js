@@ -129,7 +129,7 @@ Template.sent.events({
               emailObj.content = "Hello " + myEvents[0].eventDetails.invitees[0].realname + ", <br>";
               emailObj.content +=  "You are invited to <strong>" + myEvents[0].eventDetails.eventname + " <strong> at " + findVenue(myEvents[0].eventDetails);
               emailObj.content += "<br><br>Regards, <br>" + senderProfile[0].realname;
-              emailObj.content += "<br><br>Courtesy : Rendezvous Team <br>";
+              emailObj.content += "<br><br>Courtesy : Haku Social Team <br>";
 
               console.log(emailObj);  
               Meteor.call('sendInvites', emailObj, function (err, res) {

@@ -95,14 +95,14 @@ Template.requestInvite.events({
 
               var regUrl = "http://localhost:3000/register/" + token;
               console.log("regUrl is " + regUrl);
-              emailObj.sendFrom = "Rendezvous@ashishkumar.org"
+              emailObj.sendFrom = "support@hakusocial.com"
               emailObj.sendTo = inviteEmail;
-              emailObj.subject = "Invitation to Join Rendezvous";
+              emailObj.subject = "Invitation to Join Haku Social";
               emailObj.content = "Hi " + inviteRealname + ", <br>";
-              emailObj.content += "Welcome to Rendezvous. Please click on the link below to complete your registration process.<br><br>"
+              emailObj.content += "Welcome to Haku Social. Please click on the link below to complete your registration process.<br><br>"
               emailObj.content += "<a href=\"" + regUrl + "\">" + regUrl + "</a> <br>";
-              emailObj.content += "<br> If you did not request this invite, please ignore this email. If you need help, please contact us at rendezvous@ashishkumar.org.<br>";
-              emailObj.content += "<br><br>Regards, <br> The Rendezvous Team" ;
+              emailObj.content += "<br> If you did not request this invite, please ignore this email. If you need help, please contact us at support@hakusocial.com.<br>";
+              emailObj.content += "<br><br>Regards, <br> The Haku Social Team" ;
               emailObj.content += "<br> <br>";
 
               console.log(emailObj);  

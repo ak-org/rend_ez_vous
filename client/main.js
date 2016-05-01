@@ -52,7 +52,7 @@ Router.route('/requestInvite', {
 });
 
 Router.route('/share', function() {
-    this.render('shareRendezvous');
+    this.render('shareHakuSocial');
     this.layout('landing');
 
 

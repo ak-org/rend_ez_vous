@@ -1,1 +1,2 @@
-# rend_ez_vous
+
+# Rendezvous is now HakuSocial

@@ -93,7 +93,8 @@ Template.requestInvite.events({
                 });
               }
 
-              var regUrl = "http://localhost:3000/register/" + token;
+              //var regUrl = "http://localhost:3000/register/" + token;
+              var regUrl = Meteor.absoluteUrl("/register", {}) + token;
               console.log("regUrl is " + regUrl);
               emailObj.sendFrom = "support@hakusocial.com"
               emailObj.sendTo = inviteEmail;

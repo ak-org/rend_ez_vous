@@ -12,6 +12,10 @@
 
 	<div id="footer">
     <hr />
+   		 <div class="container text-center">
+    			<h5><a href="#" id="shareFeedback">Share Feedback</a></h5>
+    	</div>		
+    
           <div class="container text-center">
           
         <ul class="list-inline">
@@ -36,4 +40,47 @@
 	  </div>
 
 </div>
+</template>
+
+
+
+<template name="feedbackModal">
+
+   <div class="modal fade" id="animalsModal">
+      <div class="modal-dialog modal-sm">
+         <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Share Feedback</h4>
+              </div>
+			  <form id="sendFeedback-form" style="display: block;">
+	              <div class="modal-body">
+	                   <div class="form-group">
+	            
+	                              <input type="text" class="form-control required" id="feedbackName"   placeholder="Your name ">
+
+	                   </div>
+	                   <div class="form-group">
+	                          
+	                              <input type="text"  class="form-control required" id="feedbackEmail"   placeholder="Enter your Email Address ">
+
+	                   </div>
+	                   <div class="form-group">
+	     
+	                              <textarea placeholder="Feedback goes here..." rows="10" cols="80" id="feedbackMessage" class="form-control required" ></textarea>
+
+	                   </div>
+
+	              </div>
+              </form>
+
+              <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary" id="submitFeedback">Submit</button>
+                  <button type="reset" class="btn btn-default" id="cancelFeedback">Cancel</button>
+                </div>
+
+         </div>
+      </div>
+   </div>   
+
+ 
 </template>

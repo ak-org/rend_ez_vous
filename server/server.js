@@ -226,9 +226,17 @@ Meteor.methods({
                 });
      		}
      		
-     }
+     },
 
+    sendFeedback: function(emailObj) {
 
+          Email.send({
+          from: emailObj.sendFrom,
+          to: emailObj.sendTo,
+          subject: emailObj.subject,
+          html: emailObj.content
+        });
+    }
 
 
 })

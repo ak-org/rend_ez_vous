@@ -27,3 +27,6 @@ themeteorchef:jquery-validation
 random
 standard-minifier-css
 standard-minifier-js
+meteorhacks:cluster
+aldeed:autoform
+peppelg:bootstrap-3-modal

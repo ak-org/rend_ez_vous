@@ -356,6 +356,11 @@ Meteor.subscribe('profiles', function() {
             }
 
             
-         }
+         },
+
+          'click #profile-cancel' : function(e, data) {
+                Router.go('landing');
+
+          }
      });
 

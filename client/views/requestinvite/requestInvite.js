@@ -95,6 +95,7 @@ Template.requestInvite.events({
 
               //var regUrl = "http://localhost:3000/register/" + token;
               var regUrl = Meteor.absoluteUrl("register", {}) + "/" + token;
+              var youtubeUrl = "https://youtu.be/n4pOqIqzL-8";
               console.log("regUrl is " + regUrl);
               emailObj.sendFrom = "support@hakusocial.com"
               emailObj.sendTo = inviteEmail;
@@ -102,6 +103,7 @@ Template.requestInvite.events({
               emailObj.content = "Hi " + inviteRealname + ", <br>";
               emailObj.content += "Welcome to Haku Social. Please click on the link below to complete your registration process.<br><br>"
               emailObj.content += "<a href=\"" + regUrl + "\">" + regUrl + "</a> <br>";
+              emailObj.content += "<br> Looking for an overview ? Checkout the <a href=\"" + youtubeUrl + "\">" + "video tutorial" + "</a> about HakuSocial. <br>";
               emailObj.content += "<br> If you did not request this invite, please ignore this email. If you need help, please contact us at support@hakusocial.com.<br>";
               emailObj.content += "<br><br>Regards, <br> The Haku Social Team" ;
               emailObj.content += "<br> <br>";

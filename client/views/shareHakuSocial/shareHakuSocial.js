@@ -129,6 +129,7 @@ Template.shareHakuSocial.events({
 
               //var regUrl = "http://localhost:3000/register/" + token;
               var regUrl = Meteor.absoluteUrl("register", {}) + "/" + token;
+              var youtubeUrl = "https://youtu.be/n4pOqIqzL-8";
 
               console.log("regUrl is " + regUrl);
               emailObj.sendFrom = "support@hakusocial.com"
@@ -137,6 +138,8 @@ Template.shareHakuSocial.events({
               emailObj.content = "Hi " + inviteRealname + ", <br>";
               emailObj.content += "Your friend " + Meteor.user().profile.realname + " has invited you to join Haku Social. Please click on the link below to complete the registration process.<br>"
               emailObj.content += "<a href=\"" + regUrl + "\">" + regUrl + "</a><br>";
+              emailObj.content += "<br> Looking for an overview ? Checkout the <a href=\"" + youtubeUrl + "\">" + "video tutorial" + "</a> about HakuSocial. <br>";
+
               emailObj.content += "<br>If you need help, please contact us at support@hakusocial.com<br>";
               emailObj.content += "<br><br>Regards, <br> Your Haku Social Team" ;
               emailObj.content += "<br> <br>";

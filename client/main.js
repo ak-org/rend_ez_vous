@@ -17,6 +17,11 @@ Router.route('/login', {
 
 });
 
+Router.route('/learn', {
+    template: 'learn'
+
+});
+
 Router.route('/passwdRecovery', {
     template: 'passwdRecovery'
 

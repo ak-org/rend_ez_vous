@@ -97,7 +97,7 @@ Meteor.methods({
      	Email.send({
 			from: emailObj.sendFrom,
 			to: emailObj.sendTo,
-			cc: emailObj.sendFrom,
+			cc: "ashish@twopebbl.es",
 			subject: emailObj.subject,
 			html: emailObj.content
 		});

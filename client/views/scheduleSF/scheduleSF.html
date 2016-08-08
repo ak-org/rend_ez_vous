@@ -41,7 +41,15 @@
 		        {{#if price_level}}	
 			  <h5>{{showPriceLevel price_level}}</h5>
                         {{/if}}
-			</label>                
+			</label>  
+			<ul class="list-group">
+				<li class="list-group-item">
+				{{#if place_id}}
+					<a href={{showWebLink place_id}} target="_blank"><img src="/images/web.png" height="42" width="42"></a>
+		        	<a href={{showMapURL place_id}} target="_blank"><img src="/images/Google_Maps_Icon.png" height="42" width="42"></a>   
+				{{/if}}
+				</li>
+			</ul>	              
 			
 		</li>	
 		</div>

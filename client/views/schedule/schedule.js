@@ -211,6 +211,30 @@ Template.schedule.helpers({
 
     'showPriceLevel' : function(priceLevel) {
         return  ratingSymbol (priceLevel);
+    },
+
+    'showWebLink' : function(place_id) {
+        
+        Meteor.call('getRestaurantDetails', place_id, function(err, results) {
+            //console.log("Server responded with ", results);
+            returnedResults = JSON.parse(results.content);
+            //console.log("Server responded with ",returnedResults.result);
+            Session.set('restaurantDetails', returnedResults.result);
+            var returnURL = returnedResults.result.website ;
+            Session.set(place_id, returnURL);
+            Session.set(place_id + 'url', returnedResults.result.url);
+            //console.log("returning ", returnURL);
+            //return returnURL ;
+            
+        });
+
+        return Session.get(place_id);
+        
+    },
+
+    'showMapURL' : function(place_id) {
+        //console.log('returning url ', Session.get(place_id + 'url'));
+        return Session.get(place_id + 'url');
     }
    
 

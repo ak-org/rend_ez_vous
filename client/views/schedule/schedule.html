@@ -39,14 +39,23 @@
 	                <input type="checkbox" name="restaurantChoice" id="restaurantOption" >
 	                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
 			<h4 class={{@index}}>{{name}}</h4>
-		        {{#if rating}}	
-			<h6>User Rating : {{rating}}/5</h6>	
-                        {{/if}}
+		    {{#if rating}}	
+				<h6>User Rating : {{rating}}/5</h6>	
+            {{/if}}
 			<h6>{{formatted_address}}</h6>
-		        {{#if price_level}}	
-			  <h5>{{showPriceLevel price_level}}</h5>
-                        {{/if}}
-			</label>                
+		    {{#if price_level}}	
+				<h5>{{showPriceLevel price_level}}</h5>
+            {{/if}}
+            
+			</label> 
+			<ul class="list-group">
+				<li class="list-group-item">
+				{{#if place_id}}
+					<a href={{showWebLink place_id}} target="_blank"><img src="/images/web.png" height="42" width="42"></a>
+		        	<a href={{showMapURL place_id}} target="_blank"><img src="/images/Google_Maps_Icon.png" height="42" width="42"></a>   
+				{{/if}}
+				</li>
+			</ul>	               
 			
 		</li>	
 		</div>

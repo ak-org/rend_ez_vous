@@ -12,6 +12,7 @@ Meteor.methods({
       return results;
   },
 
+
 	'getRestaurantList' : function (city, cuisine, minPrice, maxPrice, radius) {
 
 		/* Sample URL 
@@ -236,6 +237,16 @@ Meteor.methods({
           subject: emailObj.subject,
           html: emailObj.content
         });
+    },
+
+    'getRestaurantDetails': function(placeid) {
+        var url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=";
+        var apiKey = "AIzaSyDjJDaW_HxsIsY7qJ0wOL1e0c8ShQ_QrKw";
+        var searchUrl = url + placeid + "&key=" + apiKey;
+        console.log(searchUrl);
+        var result = Meteor.http.call('GET', searchUrl);
+          console.log(searchUrl);
+        return result;  
     }
 
 
